@@ -1,0 +1,45 @@
+- hosts: all
+  tasks:
+    - name: Add user to vboxsf group
+      user: name={{ ansible_user_id }} groups=vboxsf append=yes
+
+    - name: Add git repository
+      become: true
+#      apt_repository:
+#        repo: "ppa:git-core/ppa"
+#        update_cache: yes
+      command: apt add-repository {{ item }}
+      with_items:
+        - ppa:webupd8team/java
+        - ppa:neovim-ppa/unstable
+
+    - name: Update apt cache
+      become: true
+      apt: update_cache=yes
+
+    - name: Accept Java 8 License
+      become: yes
+      debconf: name='oracle-java8-installer' question='shared/accepted-oracle-license-v1-1' value='true' vtype='select'
+
+    - name: Install packages
+      become: true
+      apt: name={{ item }} state=latest
+      with_items:
+        - oracle-java8-installer
+        - neovim
+        - zsh
+        - dconf-cli
+
+    - name: Set up neovim as default editor
+      command: "{{ item }}"
+      with_items:
+        - sudo update-alternatives --install /usr/bin/vi vi /usr/bin/nvim 60
+        - sudo update-alternatives --install /usr/bin/vim vim /usr/bin/nvim 60
+
+    - name: Set ZDOTDIR
+      become: true
+      lineinfile:
+        dest: /etc/zsh/zshenv
+        regexp: ^ZDOTDIR=
+        line: ZDOTDIR=$HOME/.config/zsh
+ 

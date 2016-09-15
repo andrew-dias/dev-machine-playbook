@@ -1,0 +1,69 @@
+#!/bin/bash
+
+echo "Bootstrap ansible"
+
+# install Ansible
+ppa=ansible
+pkg=ansible
+
+echo -n "Checking if $ppa ppa is defined..."
+if ! grep -q "$ppa" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
+	echo "no. Installing..."
+	sudo apt add-repository $ppa -y
+	sudo apt update
+else
+	echo "yes."
+fi
+
+echo -n "Checking if $pkg is installed..."
+if [ $(dpkg-query -W -f='${Status}' $pkg 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
+	echo "no. Installing..."
+  sudo apt install $pkg
+else
+	echo "yes."
+fi
+
+# install Git
+ppa=git
+pkg=git
+
+echo -n "Checking if $ppa ppa is defined..."
+if ! grep -q "$ppa" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
+	echo "no. Installing..."
+	sudo apt add-repository $ppa -y
+	sudo apt update
+else
+	echo "yes."
+fi
+
+echo -n "Checking if $pkg is installed..."
+if [ $(dpkg-query -W -f='${Status}' $pkg 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
+	echo "no. Installing..."
+  sudo apt install $pkg
+else
+	echo "yes."
+fi
+
+# clone playbook repo
+repoDir=$HOME/code
+ansibleRepo=dev-machine-playbook
+ansibleUrl=git@github.com:andrew-dias/$ansibleRepo.git
+
+mkdir -p $repoDir
+cd $repoDir
+
+echo -n "Checking if $ansibleRepo exists..."
+if ! [ -d $ansibleRepo ]; then
+	echo "no. Cloning $ansibleUrl..."
+	git clone $ansibleUrl
+	cd $ansibleRepo
+else
+	echo "yes. Pulling latest version..."
+	cd $ansibleRepo
+	git pull
+fi
+
+echo "Running playbook..."
+ansible-playbook playbook.yml -i hosts
+echo "Bootstrap complete"
+

@@ -1,5 +1,6 @@
 #!/bin/bash
 
+export ANSIBLE_NOCOWS=1
 echo "Bootstrap ansible"
 
 # install Ansible
@@ -9,8 +10,8 @@ pkg=ansible
 echo -n "Checking if $ppa ppa is defined..."
 if ! grep -q "$ppa" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
 	echo "no. Installing..."
-	sudo apt add-repository $ppa -y
-	sudo apt update
+	sudo add-apt-repository $ppa -y
+	sudo apt-get update
 else
 	echo "yes."
 fi
@@ -18,7 +19,7 @@ fi
 echo -n "Checking if $pkg is installed..."
 if [ $(dpkg-query -W -f='${Status}' $pkg 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
 	echo "no. Installing..."
-  sudo apt install $pkg
+  sudo apt-get install $pkg
 else
 	echo "yes."
 fi
@@ -30,8 +31,8 @@ pkg=git
 echo -n "Checking if $ppa ppa is defined..."
 if ! grep -q "$ppa" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
 	echo "no. Installing..."
-	sudo apt add-repository $ppa -y
-	sudo apt update
+	sudo add-apt-repository $ppa -y
+	sudo apt-get update
 else
 	echo "yes."
 fi
@@ -39,7 +40,7 @@ fi
 echo -n "Checking if $pkg is installed..."
 if [ $(dpkg-query -W -f='${Status}' $pkg 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
 	echo "no. Installing..."
-  sudo apt install $pkg
+  sudo apt-get install $pkg
 else
 	echo "yes."
 fi
@@ -64,6 +65,6 @@ else
 fi
 
 echo "Running playbook..."
-ansible-playbook playbook.yml -i hosts
+ansible-playbook playbook.yml -i hosts -K
 echo "Bootstrap complete"
 

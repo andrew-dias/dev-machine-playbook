@@ -3,10 +3,10 @@
     - name: Add user to vboxsf group
       user: name={{ ansible_user_id }} groups=vboxsf append=yes
 
-    - name: Add git repository
+    - name: Add apt repositories
       become: true
 #      apt_repository:
-#        repo: "ppa:git-core/ppa"
+#        repo: {{ item }}
 #        update_cache: yes
       command: apt add-repository {{ item }}
       with_items:

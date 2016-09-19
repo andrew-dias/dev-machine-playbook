@@ -1,0 +1,17 @@
+---
+- name: Clone dotfiles repo
+  git:
+    repo: "{{ dotfiles['url'] }}"
+    dest: "{{ dotfiles['target'] }}"
+    recursive: yes
+
+- name: Run dotfiles installer
+  command: "{{ dotfiles['target'] }}/install"
+
+#    - name: Set ZDOTDIR
+#      become: true
+#      lineinfile:
+#        dest: /etc/zsh/zshenv
+#        regexp: ^ZDOTDIR=
+#        line: ZDOTDIR=$HOME/.config/zsh
+# 

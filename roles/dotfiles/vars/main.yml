@@ -1,0 +1,5 @@
+---
+dotfiles:
+  url: https://github.com/andrew-dias/dotfiles-base.git
+  target: "{{ install_dir }}/dotfiles-base"
+

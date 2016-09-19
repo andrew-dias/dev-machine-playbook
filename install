@@ -1,16 +1,45 @@
 #!/bin/bash
 
+# This script downloads and executes an Ansible playbook to configure
+# my development machine
+
+programname=$0
+
+function usage {
+	echo "usage: $programname [-h] [-d directory]"
+	echo "	-h		display help"
+	echo "	-d directory	specify directory to clone playbook into"
+	exit 1
+}
+
+# loop through arguments
+while [ $# -gt 0 ]; do
+	case "$1" in
+		-h|--help)
+			usage
+			;;
+		-d|--directory)
+			install_dir=$(readlink -f $2)
+			shift 2
+			;;
+		*)
+			break
+			;;
+	esac
+done
+
+echo "Bootstrapping Ansible..."
+
 export ANSIBLE_NOCOWS=1
-echo "Bootstrap ansible"
 
 # install Ansible
-ppa=ansible
+ppa=ansible/ansible
 pkg=ansible
 
 echo -n "Checking if $ppa ppa is defined..."
 if ! grep -q "$ppa" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
 	echo "no. Installing..."
-	sudo add-apt-repository $ppa -y
+	sudo add-apt-repository ppa:$ppa -y
 	sudo apt-get update
 else
 	echo "yes."
@@ -19,19 +48,19 @@ fi
 echo -n "Checking if $pkg is installed..."
 if [ $(dpkg-query -W -f='${Status}' $pkg 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
 	echo "no. Installing..."
-  sudo apt-get install $pkg
+	sudo apt-get install $pkg
 else
 	echo "yes."
 fi
 
 # install Git
-ppa=git
+ppa=git-core/ppa
 pkg=git
 
 echo -n "Checking if $ppa ppa is defined..."
 if ! grep -q "$ppa" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
 	echo "no. Installing..."
-	sudo add-apt-repository $ppa -y
+	sudo add-apt-repository ppa:$ppa -y
 	sudo apt-get update
 else
 	echo "yes."
@@ -40,31 +69,45 @@ fi
 echo -n "Checking if $pkg is installed..."
 if [ $(dpkg-query -W -f='${Status}' $pkg 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
 	echo "no. Installing..."
-  sudo apt-get install $pkg
+	sudo apt-get install $pkg
 else
 	echo "yes."
 fi
 
-# clone playbook repo
-repoDir=$HOME/code
-ansibleRepo=dev-machine-playbook
-ansibleUrl=git@github.com:andrew-dias/$ansibleRepo.git
+# if install directory is specified, clone repo
+# otherwise assume we are running from already cloned repo
+if [[ -n "$install_dir" ]]; then
+	echo "Installing to $install_dir..."
 
-mkdir -p $repoDir
-cd $repoDir
+	# clone playbook repo
+	ansibleRepo=dev-machine-playbook
+	ansibleUrl=git@github.com:andrew-dias/$ansibleRepo.git
 
-echo -n "Checking if $ansibleRepo exists..."
-if ! [ -d $ansibleRepo ]; then
-	echo "no. Cloning $ansibleUrl..."
-	git clone $ansibleUrl
-	cd $ansibleRepo
+	mkdir -p $install_dir
+	cd $install_dir
+
+	echo -n "Checking if $ansibleRepo exists..."
+	if ! [ -d $ansibleRepo ]; then
+		echo "no. Cloning $ansibleUrl..."
+		git clone $ansibleUrl
+		cd $ansibleRepo
+	else
+		echo "yes. Pulling latest version..."
+		cd $ansibleRepo
+		git pull
+	fi
 else
-	echo "yes. Pulling latest version..."
-	cd $ansibleRepo
-	git pull
+	install_dir=$(readlink -f ..)
 fi
 
+# execute playbook
+playbook=playbook.yml
+inventory=hosts
+
+echo "Installing playbook dependencies..."
+sudo ansible-galaxy install -r requirements.yml
+
 echo "Running playbook..."
-ansible-playbook playbook.yml -i hosts -K
+ansible-playbook -i $inventory $playbook --extra-vars "install_dir=$install_dir" --check
 echo "Bootstrap complete"
 

@@ -1,0 +1,15 @@
+---
+- name: Add Neovim repositorie
+  become: true
+  command: apt add-repository ppa:neovim-ppa/unstable
+
+- name: Install packages
+  become: true
+  apt: name=neovim state=present update_cache=yes cache_valid_time=3600
+
+- name: Point vi to nvim
+  alternatives: link=/usr/bin/vi name=vi path=/usr/bin/nvim
+
+- name: Point vim to nvim
+  alternatives: link=/usr/bin/vim name=vim path=/usr/bin/nvim
+

@@ -28,7 +28,7 @@ This playbook is designed to run on a Linux Mint 18 installation. It has not bee
   git clone https://github.com/andrew-dias/dev-machine-playbook.git
   ```
 
-1. Install Ansible dependencies
+1. Install Ansible dependencies referring to the cloned `requirements.yml`
 
   ```shell
   sudo ansible-galaxy install -r requirements.yml

@@ -39,7 +39,7 @@ pkg=ansible
 echo -n "Checking if $ppa ppa is defined..."
 if ! grep -q "$ppa" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
 	echo "no. Installing..."
-	sudo add-apt-repository ppa:$ppa -y
+	sudo add-apt-repository -y ppa:$ppa
 	sudo apt-get update
 else
 	echo "yes."
@@ -48,7 +48,7 @@ fi
 echo -n "Checking if $pkg is installed..."
 if [ $(dpkg-query -W -f='${Status}' $pkg 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
 	echo "no. Installing..."
-	sudo apt-get install $pkg
+	sudo apt-get -y install $pkg </dev/null
 else
 	echo "yes."
 fi
@@ -60,7 +60,7 @@ pkg=git
 echo -n "Checking if $ppa ppa is defined..."
 if ! grep -q "$ppa" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
 	echo "no. Installing..."
-	sudo add-apt-repository ppa:$ppa -y
+	sudo add-apt-repository -y ppa:$ppa
 	sudo apt-get update
 else
 	echo "yes."
@@ -69,7 +69,7 @@ fi
 echo -n "Checking if $pkg is installed..."
 if [ $(dpkg-query -W -f='${Status}' $pkg 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
 	echo "no. Installing..."
-	sudo apt-get install $pkg
+	sudo apt-get -y install $pkg </dev/null
 else
 	echo "yes."
 fi

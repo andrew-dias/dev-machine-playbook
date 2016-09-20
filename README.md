@@ -28,10 +28,10 @@ This playbook is designed to run on a Linux Mint 18 installation. It has not bee
   git clone https://github.com/andrew-dias/dev-machine-playbook.git
   ```
 
-1. Install Ansible dependencies referring to the cloned `requirements.yml`
+1. Install Ansible dependencies referring to the cloned `requirements.yml`. Use `--roles-path` until Ansible issue [#16010](https://github.com/ansible/ansible/issues/16010) is addressed.
 
   ```shell
-  sudo ansible-galaxy install -r requirements.yml
+  sudo ansible-galaxy install -r requirements.yml --roles-path=~/.local/share/ansible/roles
   ```
 
 1. Run the playbook in the cloned repository

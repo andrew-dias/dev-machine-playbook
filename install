@@ -48,7 +48,7 @@ fi
 echo -n "Checking if $pkg is installed..."
 if [ $(dpkg-query -W -f='${Status}' $pkg 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
 	echo "no. Installing..."
-	sudo apt-get install $pkg
+	sudo apt-get -y install $pkg </dev/null
 else
 	echo "yes."
 fi
@@ -69,7 +69,7 @@ fi
 echo -n "Checking if $pkg is installed..."
 if [ $(dpkg-query -W -f='${Status}' $pkg 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
 	echo "no. Installing..."
-	sudo apt-get install $pkg
+	sudo apt-get -y install $pkg </dev/null
 else
 	echo "yes."
 fi
@@ -108,6 +108,6 @@ echo "Installing playbook dependencies..."
 sudo ansible-galaxy install -r requirements.yml
 
 echo "Running playbook..."
-ansible-playbook -i $inventory $playbook --extra-vars "install_dir=$install_dir" --check
+ansible-playbook -K -i $inventory $playbook --extra-vars "install_dir=$install_dir"
 echo "Bootstrap complete"
 

@@ -39,7 +39,7 @@ pkg=ansible
 echo -n "Checking if $ppa ppa is defined..."
 if ! grep -q "$ppa" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
 	echo "no. Installing..."
-	sudo add-apt-repository ppa:$ppa -y
+	sudo add-apt-repository -y ppa:$ppa
 	sudo apt-get update
 else
 	echo "yes."
@@ -60,7 +60,7 @@ pkg=git
 echo -n "Checking if $ppa ppa is defined..."
 if ! grep -q "$ppa" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
 	echo "no. Installing..."
-	sudo add-apt-repository ppa:$ppa -y
+	sudo add-apt-repository -y ppa:$ppa
 	sudo apt-get update
 else
 	echo "yes."
@@ -81,7 +81,7 @@ if [[ -n "$install_dir" ]]; then
 
 	# clone playbook repo
 	ansibleRepo=dev-machine-playbook
-	ansibleUrl=git@github.com:andrew-dias/$ansibleRepo.git
+	ansibleUrl=https://github.com/andrew-dias/$ansibleRepo.git
 
 	mkdir -p $install_dir
 	cd $install_dir

@@ -81,7 +81,7 @@ if [[ -n "$install_dir" ]]; then
 
 	# clone playbook repo
 	ansibleRepo=dev-machine-playbook
-	ansibleUrl=git@github.com:andrew-dias/$ansibleRepo.git
+	ansibleUrl=https://github.com/andrew-dias/$ansibleRepo.git
 
 	mkdir -p $install_dir
 	cd $install_dir

@@ -1,11 +1,12 @@
 ---
 - name: Install ZSH
-  become: true
   apt: name=zsh state=present update_cache=yes cache_valid_time=3600
+  become: true
 
 - name: Get zsh path
   command: which zsh 
   register: zsh_path
 
 - name: Switch shell to zsh
-  user: name={{ ansible_user_id }} shell=zsh_path.stdout
+  user: name={{ ansible_user_id }} shell={{ zsh_path.stdout }}
+  become: true

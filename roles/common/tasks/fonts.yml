@@ -1,10 +1,9 @@
 ---
-- file: path=/home/andrew/some_directory state=directory mode=0755
-  #- name: install source-code-pro - make temp dir
-  #  file:
-  #    path: /home/andrew/fonts
-  #    state: directory
-  #    mode: 0755
+  - name: install source-code-pro - make temp dir
+    file:
+      path: /home/andrew/fonts
+      state: directory
+      mode: 0755
       #
       #- name: install source-code-pro - download font
       #  get_url:

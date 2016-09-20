@@ -1,7 +1,4 @@
 - hosts: local
-  #  tasks:
-  #    - name: Install playbook dependencies
-  #      local_action: command ansible-galaxy install -r requirements.yml
   roles:
     - common
     - dotfiles

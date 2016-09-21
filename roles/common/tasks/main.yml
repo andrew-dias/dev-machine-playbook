@@ -1,7 +1,9 @@
 ---
+- include: setup.yml
 - include: virtualbox.yml
 - include: zsh.yml
 - include: fonts.yml
+- include: terminal.yml
 - include: neovim.yml
 - include: java.yml
-
+- include: teardown.yml

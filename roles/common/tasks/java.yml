@@ -1,9 +1,9 @@
 ---
-- name: Add java repositories
+- name: Java - Add repository
   command: add-apt-repository -y ppa:webupd8team/java
   become: true
 
-- name: Accept Java 7 License
+- name: Java - Accept Java 7 License
   debconf: 
     name: 'oracle-java7-installer'
     question: 'shared/accepted-oracle-license-v1-1'
@@ -11,7 +11,7 @@
     vtype: 'select'
   become: true
 
-- name: Accept Java 8 License
+- name: Java - Accept Java 8 License
   debconf:
     name: 'oracle-java8-installer'
     question: 'shared/accepted-oracle-license-v1-1'
@@ -19,7 +19,7 @@
     vtype: 'select'
   become: true
 
-- name: Install packages
+- name: Java - Install packages
   apt:
     name={{ item }} state=present update_cache=yes
   become: true

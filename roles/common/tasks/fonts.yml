@@ -1,38 +1,21 @@
 ---
-  - name: install developer font - make temp dir
-    file: path=../tmp state=directory mode=0755
+- name: Fonts - Download Source Code Pro
+  get_url:
+    url: "{{ fonts['archive_url'] }}"
+    dest: "{{ tmp_dir }}/source_code_pro.tar.gz"
 
-  - name: install developer font - download font
-    get_url:
-      url: "{{ fonts['archive_url'] }}"
-      dest: ../tmp/source_code_pro.tar.gz
-      mode: 0755
+- name: Fonts - Unzip downloaded font
+  unarchive: src={{ tmp_dir }}/source_code_pro.tar.gz dest={{ tmp_dir }}
 
-  - name: install developer font - unzip downloaded font
-    unarchive: src=../tmp/source_code_pro.tar.gz dest=../tmp
+- name: Fonts - Make local font directory
+  file: path={{ fonts['install_dir'] }} state=directory mode=0755
 
-  - name: install developer font - make fonts directory
-    file: path={{ fonts['install_dir'] }} state=directory mode=0755
+- name: Fonts - Copy font to local directory
+  copy: src={{ tmp_dir }}/{{ fonts['archive_dir'] }} dest={{ fonts['install_dir'] }} mode=0755
+  register: copy_fonts
 
-  - name: install developer font - copy fonts
-    copy: src=../tmp/{{ fonts['archive_dir'] }} dest={{ fonts['install_dir'] }} mode=0755
-    register: copy_fonts
+- name: Fonts - Update font cache
+  command: fc-cache -f -v
+  become: true
+  when: copy_fonts.changed
 
-  - name: install developer font - delete temp dir
-    file: path=../tmp state=absent
-
-  - name: install developer font - font cache
-    command: fc-cache -f -v
-    become: true
-    when: copy_fonts.changed
-
-  - name: install developer font - set terminal monospace font
-    gsettings: schema=org.gnome.desktop.interface key=monospace-font-name value="Source Code Pro Regular 10"
-#    gconftool2:
-#      key: /apps/gnome-terminal/profiles/Default/font
-#      string: "Source Code Pro Semi-Bold 12"
-#
-#  - name: install developer font - dont use default system font in terminal
-#    gconftool2:
-#      key: /apps/gnome-terminal/profiles/Default/use_system_font
-#      ool: false

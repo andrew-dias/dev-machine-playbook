@@ -18,7 +18,7 @@
 - name: NVM - Set default node version
   command: "bash -c '. {{ nvm['nvm_dir'] }}/nvm.sh; nvm alias default'"
 
-- name: NVM - Install global packages
-  npm: name={{ item }} global=yes executable={{ nvm['nvm_dir'] }}/versions/node/v{{ nvm['node_version'] }}/bin/npm
-  with_items:
-    - coffee-script
+  #- name: NVM - Install global packages
+  #  npm: name={{ item }} global=yes executable={{ nvm['nvm_dir'] }}/versions/node/v{{ nvm['node_version'] }}/bin/npm
+  #  with_items:
+  #    - coffee-script

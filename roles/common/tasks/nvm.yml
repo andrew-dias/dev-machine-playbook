@@ -3,6 +3,7 @@
   get_url:
     url: "{{ nvm['script_url'] }}"
     dest: "{{ tmp_dir }}"
+    mode: 0755
 
 - name: NVM - Execute install script
   shell: "{{ tmp_dir }}/{{ nvm['script_name'] }}"

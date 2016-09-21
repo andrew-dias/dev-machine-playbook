@@ -1,0 +1,6 @@
+---
+fonts:
+  archive_url: https://github.com/adobe-fonts/source-code-pro/archive/2.030R-ro/1.050R-it.tar.gz
+  archive_dir: source-code-pro-2.030R-ro-1.050R-it/OTF
+  install_dir: "{{ ansible_env.HOME }}/.local/share/fonts/source-code-pro"
+

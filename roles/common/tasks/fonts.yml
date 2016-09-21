@@ -1,44 +1,34 @@
 ---
-  - name: install source-code-pro - make temp dir
-    file:
-      path: /home/andrew/fonts
-      state: directory
-      mode: 0755
-      #
-      #- name: install source-code-pro - download font
-      #  get_url:
-      #    url: https://github.com/adobe-fonts/source-code-pro/archive/2.030R-ro/1.050R-it.tar.gz 
-      #    dest: "{{ install_dir }}/fonts/source_code_pro.tar.gz"
-      #    mode: 0755
-      #
-      #- name: install source-code-pro - unzip downloaded font
-      #  unarchive:
-      #    src: "{{ install_dir }}/fonts/source_code_pro.tar.gz"
-      #    dest: "{{ install_dir }}/fonts"
-      #
-      #- name: install source-code-pro - make fonts directory
-      #  file:
-      #    path: "{{ install_dir }}/.local/share/fonts"
-      #    state: directory
-      #
-      #- name: install source-code-pro - copy fonts
-      #  copy:
-      #    src: "{{ install_dir }}/fonts/source-code-pro-2.030R-ro-1.050R-it/OTF"
-      #    dest: "{{ install_dir }}/.local/share/fonts"
-      #    mode: 0755
-      #  register: fonts_copied
-      #
-      #- name: install source-code-pro - font cache
-      #  command: fc-cache -f -v
-      #  become: true
-      #  when: fonts_copied|changed
+  - name: install developer font - make temp dir
+    file: path=../tmp state=directory mode=0755
 
-  #- name: install source-code-pro - set system font
-  #  gconftool2:
-  #    key: /apps/gnome-terminal/profiles/Default/font
-  #    string: "Source Code Pro Semi-Bold 12"
-  #
-  #- name: install source-code-pro - dont use default system font in terminal
-  #  gconftool2:
-  #    key: /apps/gnome-terminal/profiles/Default/use_system_font
-  #    ool: false
+  - name: install developer font - download font
+    get_url:
+      url: "{{ fonts['archive_url'] }}"
+      dest: ../tmp/source_code_pro.tar.gz
+      mode: 0755
+
+  - name: install developer font - unzip downloaded font
+    unarchive: src=../tmp/source_code_pro.tar.gz dest=../tmp
+
+  - name: install developer font - make fonts directory
+    file: path={{ fonts['install_dir'] }} state=directory mode=0755
+
+  - name: install developer font - copy fonts
+    copy: src=../tmp/{{ fonts['archive_dir'] }} dest={{ fonts['install_dir'] }} mode=0755
+    register: copy_fonts
+
+  - name: install developer font - font cache
+    command: fc-cache -f -v
+    become: true
+    when: copy_fonts.changed
+
+#  - name: install developer font - set system font
+#    gconftool2:
+#      key: /apps/gnome-terminal/profiles/Default/font
+#      string: "Source Code Pro Semi-Bold 12"
+#
+#  - name: install developer font - dont use default system font in terminal
+#    gconftool2:
+#      key: /apps/gnome-terminal/profiles/Default/use_system_font
+#      ool: false

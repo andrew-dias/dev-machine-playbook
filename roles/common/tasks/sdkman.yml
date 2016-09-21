@@ -1,0 +1,14 @@
+---
+- name: SDKMAN - Download install script
+  get_url:
+    url: https://get.sdkman.io
+    dest: "{{ tmp_dir }}/sdkman_install"
+    mode: 0755
+
+- name: SDKMAN - Execute install script
+  command: "{{ tmp_dir }}/sdkman_install"
+  args:
+    creates: "{{ sdkman['install_dir'] }}"
+  environment:
+    SDKMAN_DIR: "{{ sdkman['install_dir'] }}"
+

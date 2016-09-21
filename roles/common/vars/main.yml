@@ -11,3 +11,7 @@ nvm:
   script_name: install.sh
   nvm_dir: "{{ ansible_env.HOME }}/.nvm"
   node_version: 6.6.0
+
+sdkman:
+  install_dir: "{{ ansible_env.HOME }}/.local/share/sdkman"
+

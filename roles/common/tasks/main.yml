@@ -7,4 +7,5 @@
 - include: neovim.yml
 - include: java.yml
 - include: nvm.yml
+- include: sdkman.yml
 - include: teardown.yml

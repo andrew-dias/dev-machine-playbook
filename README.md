@@ -6,21 +6,14 @@ This [Ansible](https://github.com/ansible/ansible) playbook configures my person
 
 Before running this playbook you must have both [Git](https://git-scm.com/) and [Ansible](https://github.com/ansible/ansible) installed.
 
-1. Git
 
-  ```shell
-  apt add-repository ppa:git-core/ppa
-  apt update
-  apt install git
-  ```
-
-1. Ansible
-
-  ```shell
-  apt add-repository ppa:ansible/ansible
-  apt update
-  apt install ansible
-  ```
+```shell
+apt add-repository ppa:git-core/ppa
+apt add-repository ppa:ansible/ansible
+apt update
+apt install git
+apt install ansible
+```
 
 ## Installation
 

@@ -1,0 +1,14 @@
+---
+- name: Terminal - Set monospace font
+  gsettings: schema=org.gnome.desktop.interface key=monospace-font-name value="Source Code Pro Regular 10"
+
+- name: Terminal - Install dconf-cli
+  apt: name=dconf-cli state=present
+  become: true
+
+- name: Terminal - Clone Base16 repo
+  git: repo=https://github.com/chriskempson/base16-gnome-terminal dest={{ tmp_dir }}/base16-gnome-terminal
+
+- name: Terminal - Set colour scheme to Base16 Dark
+  shell: "{{ tmp_dir }}/base16-gnome-terminal/base16-default.dark.sh"
+

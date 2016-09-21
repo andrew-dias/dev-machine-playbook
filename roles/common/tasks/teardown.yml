@@ -1,0 +1,4 @@
+---
+- name: Teardown - Remove temp directory
+  file: path={{ tmp_dir }} state=absent
+

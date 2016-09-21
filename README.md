@@ -28,15 +28,15 @@ apt install ansible
   The playbook dependencies are defind in `requirements.yml`. 
 
   ```shell
-  ansible-galaxy install -r requirements.yml --roles-path=~/.local/share/ansible/roles
+  ansible-galaxy install -r requirements.yml
   ```
 
-  Use `--roles-path` until Ansible issue [#16010](https://github.com/ansible/ansible/issues/16010) is addressed.
+  The playbook uses `ansible.cfg` to set the roles installation path to your `~/.local/share/ansible/roles` folder due to Ansible issue [#16010](https://github.com/ansible/ansible/issues/16010).
 
 1. Run the playbook
 
   ```shell
-  ansible-playbook -K -i hosts playbook.yml
+  ansible-playbook playbook.yml
   ```
 
 1. Log out to ensure all changes are activated

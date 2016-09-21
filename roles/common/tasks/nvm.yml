@@ -1,0 +1,23 @@
+---
+- name: NVM - Download install script
+  get_url:
+    url: "{{ nvm['script_url'] }}"
+    dest: "{{ tmp_dir }}"
+
+- name: NVM - Execute install script
+  shell: "{{ tmp_dir }}/{{ nvm['script_name'] }}"
+  args:
+    creates: "{{ nvm['nvm_dir'] }}"
+
+- name: NVM - Install nodejs using nvm
+  command: "bash -c '. {{ nvm['nvm_dir'] }}/nvm.sh; nvm install node'"
+  args:
+    creates: "{{ nvm['nvm_dir'] }}/versions/node"
+
+- name: NVM - Set default node version
+  command: "bash -c '. {{ nvm['nvm_dir'] }}/nvm.sh; nvm alias default'"
+
+- name: NVM - Install global packages
+  npm: name={{ item }} global=yes executable={{ nvm['nvm_dir'] }}/versions/node/v{{ nvm['node_version'] }}/bin/npm
+  with_items:
+    - coffee-script

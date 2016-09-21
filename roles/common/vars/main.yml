@@ -6,3 +6,8 @@ fonts:
   archive_dir: source-code-pro-2.030R-ro-1.050R-it/OTF
   install_dir: "{{ ansible_env.HOME }}/.local/share/fonts/source-code-pro"
 
+nvm:
+  script_url: https://raw.githubusercontent.com/creationix/nvm/v0.32.0/install.sh
+  script_name: install.sh
+  nvm_dir: "{{ ansible_env.HOME }}/.nvm"
+  node_version: 6.6.0

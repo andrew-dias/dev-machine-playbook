@@ -6,4 +6,5 @@
 - include: terminal.yml
 - include: neovim.yml
 - include: java.yml
+- include: nvm.yml
 - include: teardown.yml

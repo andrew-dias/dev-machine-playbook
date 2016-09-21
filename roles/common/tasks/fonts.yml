@@ -18,12 +18,16 @@
     copy: src=../tmp/{{ fonts['archive_dir'] }} dest={{ fonts['install_dir'] }} mode=0755
     register: copy_fonts
 
+  - name: install developer font - delete temp dir
+    file: path=../tmp state=absent
+
   - name: install developer font - font cache
     command: fc-cache -f -v
     become: true
     when: copy_fonts.changed
 
-#  - name: install developer font - set system font
+  - name: install developer font - set terminal monospace font
+    gsettings: schema=org.gnome.desktop.interface key=monospace-font-name value="Source Code Pro Regular 10"
 #    gconftool2:
 #      key: /apps/gnome-terminal/profiles/Default/font
 #      string: "Source Code Pro Semi-Bold 12"

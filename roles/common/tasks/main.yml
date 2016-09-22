@@ -6,7 +6,7 @@
 - include: terminal.yml
 - include: neovim.yml
 - include: java.yml
-- include: nvm.yml
+- include: node.yml
 - include: sdkman.yml
 - include: themes.yml
 - include: xdg.yml

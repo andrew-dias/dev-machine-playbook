@@ -1,6 +1,6 @@
 ---
 - include: setup.yml
-- include: virtualbo#.yml
+- include: virtualbox.yml
 - include: zsh.yml
 - include: fonts.yml
 - include: terminal.yml

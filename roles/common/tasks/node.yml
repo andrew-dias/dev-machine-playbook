@@ -11,7 +11,7 @@
     creates: "{{ nvm['nvm_dir'] }}"
 
 - name: NVM - Install nodejs using nvm
-  command: "bash -c '. {{ nvm['nvm_dir'] }}/nvm.sh; nvm install node'"
+  command: "bash -c '. {{ nvm['nvm_dir'] }}/nvm.sh; nvm install node stable'"
   args:
     creates: "{{ nvm['nvm_dir'] }}/versions/node"
 

@@ -11,6 +11,7 @@
 
 - name: Terminal - Install JQ library (required by script)
   apt: name=jq state=present
+  become: true
 
 - name: Terminal - Find existing Base16 profile
   script: roles/common/files/find-profile.sh "Base 16 Dark"

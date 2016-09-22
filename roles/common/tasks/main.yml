@@ -1,6 +1,6 @@
 ---
 - include: setup.yml
-- include: virtualbox.yml
+- include: virtualbo#.yml
 - include: zsh.yml
 - include: fonts.yml
 - include: terminal.yml
@@ -9,4 +9,5 @@
 - include: nvm.yml
 - include: sdkman.yml
 - include: themes.yml
+- include: xdg.yml
 - include: teardown.yml

@@ -1,0 +1,25 @@
+---
+- name: Themes - Set desktop theme
+  gsettings: schema=org.cinnamon.theme key=name value=Mint-Y-Dark
+
+- name: Themes - Set controls theme
+  gsettings: schema=org.cinnamon.desktop.interface key=gtk-theme value=Mint-Y
+
+- name: Themes - Set windows borders theme
+  gsettings: schema=org.cinnamon.desktop.wm.preferences key=theme value=Mint-Y
+
+- name: Themes - Add Numix icon theme repository
+  command: add-apt-repository -y ppa:numix/ppa
+  become: true
+
+- name: Themes - Install Numix icon theme
+  apt: name=numix-icon-theme state=present update_cache=yes
+  become: true
+
+- name: Themes - Install Numix Circle icon theme
+  apt: name=numix-icon-theme-circle state=present
+  become: true
+
+- name: Set icons theme
+  gsettings: schema=org.cinnamon.desktop.interface key=icon-theme value=Numix-Circle
+

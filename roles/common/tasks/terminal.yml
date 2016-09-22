@@ -9,6 +9,9 @@
 - name: Terminal - Clone Base16 repo
   git: repo=https://github.com/chriskempson/base16-gnome-terminal dest={{ tmp_dir }}/base16-gnome-terminal
 
+- name: Terminal - Install JQ library (required by script)
+  apt: name=jq state=present
+
 - name: Terminal - Find existing Base16 profile
   script: roles/common/files/find-profile.sh "Base 16 Dark"
   register: profile_found

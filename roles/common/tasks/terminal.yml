@@ -9,6 +9,11 @@
 - name: Terminal - Clone Base16 repo
   git: repo=https://github.com/chriskempson/base16-gnome-terminal dest={{ tmp_dir }}/base16-gnome-terminal
 
+- name: Terminal - Find existing Base16 profile
+  script: roles/common/files/find-profile.sh "Base 16 Dark"
+  register: profile_found
+
 - name: Terminal - Set colour scheme to Base16 Dark
   shell: "{{ tmp_dir }}/base16-gnome-terminal/base16-default.dark.sh"
+  when: profile_found.stdout != "yes\n"
 

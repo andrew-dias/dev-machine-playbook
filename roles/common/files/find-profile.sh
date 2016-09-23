@@ -1,5 +1,8 @@
 #!/bin/bash
 
+IFS=$'\n'
+
+output=no
 profiles=($(dconf read /org/gnome/terminal/legacy/profiles:/list | tr "'" '"' | jq '.[]'))
 
 for i in "${profiles[@]}"
@@ -8,7 +11,10 @@ do
 
         if [ "${pname:1:-1}" = "$1" ]
         then
-                echo "yes"
+                output=yes
+		break
         fi
 done
+
+echo -n $output
 

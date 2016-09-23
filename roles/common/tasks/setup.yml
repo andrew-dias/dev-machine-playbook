@@ -2,3 +2,7 @@
 - name: Setup - Create tmp folder
   file: path={{ tmp_dir }} state=directory mode=0755
 
+- name: Setup - Install curl
+  apt: name=curl state=present
+  become: true
+

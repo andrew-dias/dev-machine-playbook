@@ -1,5 +1,5 @@
 ---
-tmp_dir: "{{ ansible_env.HOME }}/ansible-tmp"
+tmp_dir: "{{ ansible_env.HOME }}/.ansible/ansible-tmp"
 
 fonts:
   archive_url: https://github.com/adobe-fonts/source-code-pro/archive/2.030R-ro/1.050R-it.tar.gz
@@ -9,9 +9,9 @@ fonts:
 nvm:
   script_url: https://raw.githubusercontent.com/creationix/nvm/v0.32.0/install.sh
   script_name: install.sh
-  nvm_dir: "{{ ansible_env.HOME }}/.nvm"
+  nvm_dir: "{{ ansible_env.HOME }}/.local/share/nvm"
   node_version: 6.6.0
 
 sdkman:
-  install_dir: "{{ ansible_env.HOME }}/.local/share/sdkman"
+  sdkman_dir: "{{ ansible_env.HOME }}/.local/share/sdkman"
 

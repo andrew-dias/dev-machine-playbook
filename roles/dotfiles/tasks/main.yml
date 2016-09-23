@@ -8,14 +8,14 @@
 - name: Dotfiles - Run common dotfiles installer
   command: "{{ dotfiles['common_target'] }}/install"
 
-- name: Dotfiles - Clone local dotfiles repo
-  git:
-    repo: "{{ dotfiles['local_url'] }}"
-    dest: "{{ dotfiles['local_target'] }}"
-    recursive: yes
-
-- name: Dotfiles - Run local dotfiles installer
-  command: "{{ dotfiles['local_target'] }}/install"
+  #- name: Dotfiles - Clone local dotfiles repo
+  #  git:
+  #    repo: "{{ dotfiles['local_url'] }}"
+  #    dest: "{{ dotfiles['local_target'] }}"
+  #    recursive: yes
+  #
+  #- name: Dotfiles - Run local dotfiles installer
+  #  command: "{{ dotfiles['local_target'] }}/install"
 
 - name: Dofiles - Set ZDOTDIR
   become: true

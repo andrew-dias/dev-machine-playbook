@@ -1,13 +1,14 @@
 ---
 - include: setup.yml
-- include: virtualbox.yml
-- include: zsh.yml
 - include: fonts.yml
-- include: terminal.yml
-- include: neovim.yml
 - include: java.yml
+- include: neovim.yml
 - include: node.yml
 - include: sdkman.yml
+- include: terminal.yml
 - include: themes.yml
+- include: tmux.yml
 - include: xdg.yml
+- include: virtualbox.yml
+- include: zsh.yml
 - include: teardown.yml

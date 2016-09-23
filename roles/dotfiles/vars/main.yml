@@ -1,5 +1,7 @@
 ---
 dotfiles:
-  url: https://github.com/andrew-dias/dotfiles-base.git
-  target: "../dotfiles-base"
+  common_url: https://github.com/andrew-dias/dotfiles-base.git
+  common_target: "../dotfiles-base"
+#  local_url: https://github.com/andrew-dias/dotfiles-work.git
+  local_target: "../dotfiles-local"
 

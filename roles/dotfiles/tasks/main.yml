@@ -1,17 +1,25 @@
 ---
-- name: Clone dotfiles repo
+- name: Dotfiles - Clone common dotfiles repo
   git:
-    repo: "{{ dotfiles['url'] }}"
-    dest: "{{ dotfiles['target'] }}"
+    repo: "{{ dotfiles['common_url'] }}"
+    dest: "{{ dotfiles['common_target'] }}"
     recursive: yes
 
-- name: Run dotfiles installer
-  command: "{{ dotfiles['target'] }}/install"
+- name: Dotfiles - Run common dotfiles installer
+  command: "{{ dotfiles['common_target'] }}/install"
 
-#    - name: Set ZDOTDIR
-#      become: true
-#      lineinfile:
-#        dest: /etc/zsh/zshenv
-#        regexp: ^ZDOTDIR=
-#        line: ZDOTDIR=$HOME/.config/zsh
-# 
+- name: Dotfiles - Clone local dotfiles repo
+  git:
+    repo: "{{ dotfiles['local_url'] }}"
+    dest: "{{ dotfiles['local_target'] }}"
+    recursive: yes
+
+- name: Dotfiles - Run local dotfiles installer
+  command: "{{ dotfiles['local_target'] }}/install"
+
+- name: Dofiles - Set ZDOTDIR
+  become: true
+  lineinfile:
+    dest: /etc/zsh/zshenv
+    regexp: ^ZDOTDIR=
+    line: ZDOTDIR=$HOME/.config/zsh

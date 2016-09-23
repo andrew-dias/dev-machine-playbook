@@ -1,4 +1,6 @@
 ---
+# credit to https://truongtx.me/2015/11/02/ansible-install-and-work-with-nodejs-using-nvm
+# for helping get nvm commands to run with bash -c
 - name: NVM - Download install script
   get_url:
     url: "{{ nvm['script_url'] }}"
@@ -6,9 +8,12 @@
     mode: 0755
 
 - name: NVM - Execute install script
-  shell: "{{ tmp_dir }}/{{ nvm['script_name'] }}"
+  shell: "export NVM_DIR={{ nvm['nvm_dir'] }} && {{ tmp_dir }}/{{ nvm['script_name'] }}"
   args:
     creates: "{{ nvm['nvm_dir'] }}"
+
+- name: NVM - Delete zshrc (managed by dotfiles)
+  file: path={{ ansible_env.HOME }}/.zshrc state=absent
 
 - name: NVM - Install nodejs using nvm
   command: "bash -c '. {{ nvm['nvm_dir'] }}/nvm.sh; nvm install node stable'"

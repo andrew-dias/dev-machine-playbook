@@ -20,6 +20,6 @@
   apt: name=numix-icon-theme-circle state=present
   become: true
 
-- name: Set icons theme
+- name: Themes - Set icons theme
   gsettings: schema=org.cinnamon.desktop.interface key=icon-theme value=Numix-Circle
 

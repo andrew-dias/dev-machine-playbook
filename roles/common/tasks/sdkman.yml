@@ -6,9 +6,7 @@
     mode: 0755
 
 - name: SDKMAN - Execute install script
-  command: "{{ tmp_dir }}/sdkman_install"
+  shell: "export SDKMAN_DIR={{ sdkman['sdkman_dir'] }} && {{ tmp_dir }}/sdkman_install"
   args:
-    creates: "{{ sdkman['install_dir'] }}"
-  environment:
-    SDKMAN_DIR: "{{ sdkman['install_dir'] }}"
+    creates: "{{ sdkman['sdkman_dir'] }}"
 

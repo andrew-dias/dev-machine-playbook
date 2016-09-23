@@ -2,13 +2,9 @@
 - set_fact:
     outer_item: "{{ item }}"
 
-- debug: var=outer_item
-
 - name: Terminal - Base16 - Find if existing {{ outer_item.name }} profile exists
   script: roles/common/files/find-profile.sh "{{ outer_item.name }}"
   register: profile_found
-
-- debug: var=profile_found
 
 - name: Terminal - Base16 - Set colour scheme to {{ outer_item.name }}
   shell: "{{ tmp_dir }}/base16-gnome-terminal/{{ outer_item.file_name }}"

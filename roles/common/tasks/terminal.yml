@@ -2,19 +2,19 @@
 - name: Terminal - Set monospace font
   gsettings: schema=org.gnome.desktop.interface key=monospace-font-name value="Source Code Pro Regular 10"
 
-- name: Terminal - Install dconf-cli
-  apt: name=dconf-cli state=present
-  become: true
-
-- name: Terminal - Clone Base16 repo
-  git: repo=https://github.com/chriskempson/base16-gnome-terminal dest={{ tmp_dir }}/base16-gnome-terminal
-
-- name: Terminal - Install JQ library (required by script)
-  apt: name=jq state=present
-  become: true
-
-- include: roles/common/tasks/terminal-base16.yml
-  with_items:
-    - { file_name: 'base16-default.dark.sh', name: 'Base 16 Default Dark' }
-    - { file_name: 'base16-default.light.sh', name: 'Base 16 Default Light' }
-    
+  #- name: Terminal - Install dconf-cli
+  #  apt: name=dconf-cli state=present
+  #  become: true
+  #
+  #- name: Terminal - Clone Base16 repo
+  #  git: repo=https://github.com/chriskempson/base16-gnome-terminal dest={{ tmp_dir }}/base16-gnome-terminal
+  #
+  #- name: Terminal - Install JQ library (required by script)
+  #  apt: name=jq state=present
+  #  become: true
+  #
+  #- include: roles/common/tasks/terminal-base16.yml
+  #  with_items:
+  #    - { file_name: 'base16-default.dark.sh', name: 'Base 16 Default Dark' }
+  #    - { file_name: 'base16-default.light.sh', name: 'Base 16 Default Light' }
+  #

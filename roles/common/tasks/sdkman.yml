@@ -10,3 +10,6 @@
   args:
     creates: "{{ sdkman['sdkman_dir'] }}"
 
+- name: NVM - Delete zshrc (managed by dotfiles)
+  file: path={{ ansible_env.HOME }}/.zshrc state=absent
+

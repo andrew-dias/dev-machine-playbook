@@ -40,8 +40,12 @@ apt install ansible
   ```shell
   ansible-playbook playbook.yml
   ```
-  
-  The playbook takes an optional --extra-vars parameter to receive a .yml file that (typically) defines dotfiles repos to clone and install.  For example, a file `local-vars.yml` could be maintaind on the local filesystem:
+
+1. Log out to ensure all changes are activated
+
+## Dotfiles
+
+The playbook takes an optional --extra-vars parameter to receive a .yml file that (typically) defines dotfiles repos to clone and install.  For example, a file `local-vars.yml` could be maintaind on the local filesystem:
   
   ```
   ---
@@ -61,8 +65,6 @@ apt install ansible
   ```shell
   ansible-playbook playbook.yml --extra-vars=@../local-vars.yml
   ```
-
-1. Log out to ensure all changes are activated
 
 ## Manual Steps (for now)
 

@@ -1,13 +1,13 @@
 ---
 - name: Dotfiles - Clone dotfiles repo
   git:
-    repo: "{{ item['url'] }}"
-    dest: "{{ item['target'] }}"
+    repo: "{{ item['repo'] }}"
+    dest: "{{ item['dest'] }}"
     recursive: yes
   with_items: "{{ dotfiles|default([]) }}"
 
 - name: Dotfiles - Run dotfiles installer
-  command: "{{ item['target'] }}/install"
+  command: "{{ item['dest'] }}/{{ item['runner'] }}"
   with_items: "{{ dotfiles|default([]) }}"
 
 - name: Dofiles - Set ZDOTDIR

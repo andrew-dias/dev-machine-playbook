@@ -68,7 +68,13 @@ The playbook takes an optional --extra-vars parameter to receive a .yml file tha
 
 ## Manual Steps (for now)
 
-* ssh
+* **ssh**: In my case I copy my ssh keys from an external location.
+  
+  ```shell
+  $ cp -r <source-ssh-dir> ~/.config/ssh
+  $ chmod 644 ~/.config/ssh/id_rsa.pub && chmod 600 ~/.config/ssh/id_rsa
+  ```
+    
 * Gitkraken
 * IntelliJ
 * Atom

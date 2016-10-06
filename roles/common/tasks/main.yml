@@ -1,13 +1,27 @@
 ---
 - include: setup.yml
+  tags: [setup]
 - include: fonts.yml
+  tags: [fonts]
 - include: java.yml
+  tags: [java]
 - include: neovim.yml
+  tags: [neovim]
 - include: sdkman.yml
+  tags: [sdkman]
 - include: terminal.yml
+  tags: [terminal]
 - include: themes.yml
+  tags: [themes]
 - include: tmux.yml
+  tags: [tmux]
+- include: typora.yml
+  tags: [typora]
 - include: xdg.yml
+  tags: [xdg]
 - include: virtualbox.yml
+  tags: [virtualbox]
 - include: zsh.yml
+  tags: [zsh]
 - include: teardown.yml
+  tags: [teardown]

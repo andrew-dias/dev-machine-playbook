@@ -5,10 +5,14 @@
     dest: "{{ item['dest'] }}"
     recursive: yes
   with_items: "{{ dotfiles|default([]) }}"
+  tags:
+    - dotfiles
 
 - name: Dotfiles - Run dotfiles installer
   command: "{{ item['dest'] }}/{{ item['runner'] }}"
   with_items: "{{ dotfiles|default([]) }}"
+  tags:
+    - dotfiles
 
 - name: Dofiles - Set ZDOTDIR
   become: true
@@ -16,3 +20,5 @@
     dest: /etc/zsh/zshenv
     regexp: ^ZDOTDIR=
     line: ZDOTDIR=$HOME/.config/zsh
+  tags:
+    - dotfiles

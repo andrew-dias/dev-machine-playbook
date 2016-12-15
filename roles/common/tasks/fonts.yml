@@ -1,20 +1,25 @@
 ---
 - name: Fonts - Create temp extract folder
-  file: path={{ tmp_dir }}/fonts state=directory mode=0755
+  file: path={{ tmp_dir }}/fonts/{{ item['name'] }} state=directory mode=0755
+  with_items: "{{ fonts }}"
 
 - name: Fonts - Download
   get_url:
-    url: "{{ fonts['archive_url'] }}"
-    dest: "{{ tmp_dir }}/{{ fonts['archive_file'] }}"
+    url: "{{ item['archive_url'] }}"
+    dest: "{{ tmp_dir }}/{{ item['archive_file'] }}"
+  with_items: "{{ fonts }}"
 
 - name: Fonts - Unzip
-  unarchive: src={{ tmp_dir }}/{{ fonts['archive_file'] }} dest={{ tmp_dir }}/fonts/{{ fonts['archive_root_dir'] }}
+  unarchive: src={{ tmp_dir }}/{{ item['archive_file'] }} dest={{ tmp_dir }}/fonts/{{ item['name'] }}
+  with_items: "{{ fonts }}"
 
 - name: Fonts - Make local font directory
-  file: path={{ fonts['install_dir'] }} state=directory mode=0755
+  file: path={{ item['install_dir'] }} state=directory mode=0755
+  with_items: "{{ fonts }}"
 
 - name: Fonts - Copy font to local directory
-  copy: src={{ tmp_dir }}/fonts/{{ fonts['archive_root_dir'] }} dest={{ fonts['install_dir'] }} mode=0755
+  copy: src={{ tmp_dir }}/fonts/{{ item['name'] }}/{{ item['archive_root_dir'] }} dest={{ item['install_dir'] }} mode=0755
+  with_items: "{{ fonts }}"
   register: copy_fonts
 
 - name: Fonts - Update font cache

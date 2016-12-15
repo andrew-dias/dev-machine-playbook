@@ -2,10 +2,16 @@
 tmp_dir: "{{ ansible_env.HOME }}/.ansible/ansible-tmp"
 
 fonts:
-  archive_url: https://github.com/i-tu/Hasklig/releases/download/v1.0-beta/Hasklig-1.0-Beta.zip
-  archive_root_dir: #source-code-pro-2.030R-ro-1.050R-it/OTF
-  archive_file: Hasklig-1.0-Beta.zip
-  install_dir: "{{ ansible_env.HOME }}/.local/share/fonts/hasklig/OTF"
+  - name: source-code-pro
+    archive_url: https://github.com/adobe-fonts/source-code-pro/archive/2.030R-ro/1.050R-it.tar.gz
+    archive_root_dir: source-code-pro-2.030R-ro-1.050R-it/OTF
+    archive_file: source-code-pro-2.030R-ro-1.050R-it.tar.gz
+    install_dir: "{{ ansible_env.HOME }}/.local/share/fonts/source-code-pro"
+  - name: hasklig
+    archive_url: https://github.com/i-tu/Hasklig/releases/download/v1.0-beta/Hasklig-1.0-Beta.zip
+    archive_root_dir: #hasklig
+    archive_file: Hasklig-1.0-Beta.zip
+    install_dir: "{{ ansible_env.HOME }}/.local/share/fonts/hasklig/OTF"
 
 nvm:
   script_url: https://raw.githubusercontent.com/creationix/nvm/v0.32.0/install.sh

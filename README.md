@@ -82,3 +82,4 @@ The playbook takes an optional --extra-vars parameter to receive a .yml file tha
 * Grails (through sdkman)
 * Gradle (through sdkman)
 * Desktop panel launchers
+* Yarn

@@ -23,5 +23,7 @@
   tags: [virtualbox]
 - include: zsh.yml
   tags: [zsh]
+- include: sysctl.yml
+  tags: [sysctl]
 - include: teardown.yml
   tags: [teardown]

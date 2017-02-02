@@ -1,5 +1,5 @@
 ---
-- name: Java - Add repository
+- name: Sysctl - Set inotify max watches
   sysctl:
     name: fs.inotify.max_user_watches
     value: 524288

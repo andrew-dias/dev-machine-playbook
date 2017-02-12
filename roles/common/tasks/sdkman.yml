@@ -6,9 +6,9 @@
     mode: 0755
 
 - name: SDKMAN - Execute install script
-  shell: "export SDKMAN_DIR={{ sdkman['sdkman_dir'] }} && {{ tmp_dir }}/sdkman_install"
+  shell: "{{ tmp_dir }}/sdkman_install"
   args:
-    creates: "{{ sdkman['sdkman_dir'] }}"
+    creates: "{{ ansible_env.HOME}}/.sdkman"
 
 - name: SDKMAN - Delete zshrc (managed by dotfiles)
   file: path={{ ansible_env.HOME }}/.zshrc state=absent

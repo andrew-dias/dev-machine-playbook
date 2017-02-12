@@ -19,6 +19,3 @@ nvm:
   nvm_dir: "{{ ansible_env.HOME }}/.local/share/nvm"
   node_version: 6.6.0
 
-sdkman:
-  sdkman_dir: "{{ ansible_env.HOME }}/.local/share/sdkman"
-

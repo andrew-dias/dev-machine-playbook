@@ -1,6 +1,6 @@
 ---
 - include: setup.yml
-  tags: [setup]
+  tags: [always]
 - include: fonts.yml
   tags: [fonts]
 - include: java.yml
@@ -26,4 +26,4 @@
 - include: sysctl.yml
   tags: [sysctl]
 - include: teardown.yml
-  tags: [teardown]
+  tags: [always]

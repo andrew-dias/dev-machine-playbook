@@ -1,0 +1,5 @@
+---
+- name: XORG - Copy synaptics laptop config
+  copy: src=roles/common/files/51-synaptics-hpspectre.conf dest=/usr/share/X11/xorg.conf.d/51-synaptics-hpspectre.conf force=yes
+  become: true
+

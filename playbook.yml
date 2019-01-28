@@ -1,6 +1,10 @@
-- hosts: local
+- hosts: localhost
+  tasks:
+  - name: Install curl
+    apt: name=curl state=present
+    become: true     
   roles:
-    - common
-    - dotfiles
-    - { role: cmprescott.chrome, become: true }
+  - developer-workstation
+
+
 

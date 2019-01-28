@@ -1,0 +1,11 @@
+---
+# Ubuntu 18.04 codename
+ubuntu_codename: bionic
+
+# fonts
+font_dir: "{{ ansible_env.HOME }}/.local/share/fonts"
+fonts:
+  - name: hasklig
+    archive_url: https://github.com/i-tu/Hasklig/releases/download/1.1/Hasklig-1.1.zip
+
+

@@ -1,0 +1,41 @@
+---
+- name: XDG - Back up user-dirs configuration
+  copy: 
+    src: "{{ ansible_env.HOME }}/.config/user-dirs.dirs"
+    dest: "{{ ansible_env.HOME }}/.config/user-dirs.dirs.bak"
+
+- name: XDG - Copy user-dirs configuration
+  copy: 
+    src: user-dirs.dirs
+    dest: "{{ ansible_env.HOME }}/.config/user-dirs.dirs"
+
+- name: XDG - Delete Templates directory
+  file:
+    path: "{{ ansible_env.HOME }}/Templates"
+    state: absent
+
+- name: XDG - Delete Public directory
+  file:
+    path: "{{ ansible_env.HOME }}/Public"
+    state: absent
+
+- name: XDG - Delete Documents directory
+  file:
+    path: "{{ ansible_env.HOME }}/Documents"
+    state: absent
+
+- name: XDG - Delete Music directory
+  file:
+    path: "{{ ansible_env.HOME }}/Music"
+    state: absent
+
+- name: XDG - Delete Pictures directory
+  file:
+    path: "{{ ansible_env.HOME }}/Pictures"
+    state: absent
+
+- name: XDG - Delete Videos directory
+  file:
+    path: "{{ ansible_env.HOME }}/Videos"
+    state: absent
+

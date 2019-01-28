@@ -79,3 +79,8 @@ The playbook takes an optional --extra-vars parameter to receive a .yml file tha
 * Gradle (through sdkman)
 * Desktop panel launchers
 * Yarn
+* Enable redshift
+*  ansible-playbook playbook.yml -i hosts -K
+* dconf editor
+
+

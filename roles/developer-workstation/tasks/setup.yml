@@ -1,0 +1,9 @@
+---
+- name: Create temporary working directory
+  tempfile:
+    state: directory
+  register: _tmp
+
+- debug:
+    msg: Working directory is {{ _tmp.path }}
+

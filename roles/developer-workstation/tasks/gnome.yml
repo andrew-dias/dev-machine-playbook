@@ -1,0 +1,54 @@
+---
+- name: Install python-psutil package
+  apt: 
+    name: python-psutil
+  become: true
+
+- name: GNOME - Set terminal font
+  dconf:
+    key: "/org/gnome/desktop/interface/monospace-font-name"
+    value: "'Ubuntu Mono 12'"
+
+- name: GNOME - Set desktop theme
+  dconf:
+    key: "/org/gnome/desktop/interface/monospace-font-name"
+  gsettings: schema=org.cinnamon.theme key=name value=Mint-Y-Dark
+
+- name: GNOME - Set controls theme
+  gsettings: schema=org.cinnamon.desktop.interface key=gtk-theme value=Mint-Y
+
+- name: GNOME - Set windows borders theme
+  gsettings: schema=org.cinnamon.desktop.wm.preferences key=theme value=Mint-Y
+
+- name: GNOME - Add Numix icon theme repository
+  command: add-apt-repository -y ppa:numix/ppa
+  become: true
+
+- name: GNOME - Install Numix icon theme
+  apt: name=numix-icon-theme state=present update_cache=yes
+  become: true
+
+- name: GNOME - Install Numix Circle icon theme
+  apt: name=numix-icon-theme-circle state=present
+  become: true
+
+- name: GNOME - Set icons theme
+  gsettings: schema=org.cinnamon.desktop.interface key=icon-theme value=Numix-Circle
+
+
+#- name: Terminal - Install dconf-cli
+#  apt: name=dconf-cli state=present
+#  become: true
+#
+#- name: Terminal - Clone Base16 repo
+#  git: repo=https://github.com/chriskempson/base16-gnome-terminal dest={{ tmp_dir }}/base16-gnome-terminal
+#
+#- name: Terminal - Install JQ library (required by script)
+#  apt: name=jq state=present
+#  become: true
+#
+#- include: roles/common/tasks/terminal-base16.yml
+#  with_items:
+#    - { file_name: 'base16-default.dark.sh', name: 'Base 16 Default Dark' }
+#    - { file_name: 'base16-default.light.sh', name: 'Base 16 Default Light' }
+#

@@ -1,0 +1,34 @@
+---
+- name: Packages - Install curl
+  apt:
+    name: curl
+  become: true
+
+- name: Packages - Add neovim PPA
+  apt_repository:
+    repo: 'ppa:neovim-ppa/stable'
+    codename: "{{ ubuntu_codename }}"
+  become: true
+
+- name: Packages - Install neovim
+  apt: 
+    name: neovim
+  become: true
+
+- name: Packages - Install tmux
+  apt: 
+    name: tmux
+  become: true
+
+- name: Packages - Add numix PPA
+  apt_repository:
+    repo: 'ppa:numix/ppa'
+    codename: "{{ ubuntu_codename }}"
+  become: true
+
+- name: Packages - Install numix-icon-theme-circle
+  apt: 
+    name: numix-icon-theme-circle
+  become: true
+
+

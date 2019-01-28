@@ -1,0 +1,19 @@
+- name: Fonts - Ensure {{ font_dir }} exists
+  file:
+    path: "{{ font_dir }}"
+    state: directory
+
+- name: Fonts - Download each font
+  unarchive:
+    remote_src: yes
+    src: "{{ item['archive_url'] }}"
+    dest: "{{ font_dir }}"    
+  with_items: "{{ fonts }}"
+  register: archive_contents
+
+- name: Fonts - Update cache
+  command: fc-cache -f -v
+  become: true
+  when: archive_contents is changed
+
+

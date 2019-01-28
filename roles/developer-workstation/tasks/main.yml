@@ -1,0 +1,27 @@
+---
+- include: setup.yml
+  tags: [always]
+
+# OS packages
+- include: packages.yml
+  tags: [packages]
+- include: sdkman.yml
+  tags: [sdkman]
+
+#- include: zsh.yml
+#  tags: [zsh]
+#- include: sysctl.yml
+#  tags: [sysctl]
+#- include: xorg.yml
+#  tags: [xorg]
+
+# OS look and feel
+- include: xdg.yml
+  tags: [xdg]
+- include: fonts.yml
+  tags: [fonts]
+#- include: gnome.yml
+#  tags: [gnome]
+- include: teardown.yml
+  tags: [always]
+

@@ -1,5 +1,0 @@
----
-- name: Virtualbox - Add user to vboxsf group
-  user: name={{ ansible_user_id }} groups=vboxsf append=yes
-  become: true
-

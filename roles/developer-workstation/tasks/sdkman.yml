@@ -1,0 +1,16 @@
+---
+- name: Check if .sdkman exists
+  stat: path={{ansible_env.HOME}}/.sdkman
+  register: p
+
+- name: SDKMAN - Download install script
+  block:  
+    - get_url:
+        url: https://get.sdkman.io
+        mode: 0755
+        dest: "{{ _tmp.path }}/sdkman_install"
+    - shell: "{{ _tmp.path }}/sdkman_install"
+      args:
+        creates: "{{ ansible_env.HOME}}/.sdkman"
+  when: not p.stat.exists
+

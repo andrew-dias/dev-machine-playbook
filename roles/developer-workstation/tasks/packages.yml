@@ -7,7 +7,6 @@
 - name: Packages - Add neovim PPA
   apt_repository:
     repo: 'ppa:neovim-ppa/stable'
-    codename: "{{ ubuntu_codename }}"
   become: true
 
 - name: Packages - Install neovim
@@ -20,15 +19,8 @@
     name: tmux
   become: true
 
-- name: Packages - Add numix PPA
-  apt_repository:
-    repo: 'ppa:numix/ppa'
-    codename: "{{ ubuntu_codename }}"
-  become: true
-
-- name: Packages - Install numix-icon-theme-circle
+- name: Packages - Install jq
   apt: 
-    name: numix-icon-theme-circle
+    name: jq
   become: true
-
 

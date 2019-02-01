@@ -1,18 +1,19 @@
 ---
-- name: XDG - Back up user-dirs configuration
-  copy: 
-    src: "{{ ansible_env.HOME }}/.config/user-dirs.dirs"
-    dest: "{{ ansible_env.HOME }}/.config/user-dirs.dirs.bak"
-
-- name: XDG - Copy user-dirs configuration
+#
+# Remove some standard folders from home folder
+# See http://jamesmcminn.com/2012/12/removing-entries-from-nautilus-3-6-places/
+#
+- name: XDG - Write user-dirs.dirs
   copy: 
     src: user-dirs.dirs
     dest: "{{ ansible_env.HOME }}/.config/user-dirs.dirs"
+    backup: yes
 
-- name: XDG - Delete Templates directory
-  file:
-    path: "{{ ansible_env.HOME }}/Templates"
-    state: absent
+- name: XDG - Write user-dirs.conf
+  copy: 
+    src: user-dirs.conf
+    dest: "{{ ansible_env.HOME }}/.config/user-dirs.conf"
+    backup: yes
 
 - name: XDG - Delete Public directory
   file:

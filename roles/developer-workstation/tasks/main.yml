@@ -5,23 +5,23 @@
 # OS packages
 - include: packages.yml
   tags: [packages]
+
+# Downloaded tools
 - include: sdkman.yml
   tags: [sdkman]
+- include: npm.yml
+  tags: [npm]
 
-#- include: zsh.yml
-#  tags: [zsh]
-#- include: sysctl.yml
-#  tags: [sysctl]
-#- include: xorg.yml
-#  tags: [xorg]
+- include: zsh.yml
+  tags: [zsh]
+- include: sysctl.yml
+  tags: [sysctl]
 
 # OS look and feel
 - include: xdg.yml
   tags: [xdg]
-- include: fonts.yml
-  tags: [fonts]
-#- include: gnome.yml
-#  tags: [gnome]
+#- include: fonts.yml
+#  tags: [fonts]
 - include: teardown.yml
   tags: [always]
 

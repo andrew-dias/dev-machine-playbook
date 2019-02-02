@@ -12,8 +12,8 @@
     . {{ ansible_env.HOME }}/.nvm/nvm.sh && nvm install {{ item }}
   args:
     executable: /bin/zsh
-    creates: "{{ ansible_env.HOME }}/.nvm/versions/{{ item }}"
+    creates: "{{ ansible_env.HOME }}/.nvm/versions/node/v{{ item }}"
   loop:
-    - lts/dubnium
-    - lts/carbon
+    - 10.15.1
+    - 8.15.0
 

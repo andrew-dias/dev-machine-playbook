@@ -20,8 +20,8 @@
 # OS look and feel
 - include: xdg.yml
   tags: [xdg]
-#- include: fonts.yml
-#  tags: [fonts]
+- include: fonts.yml
+  tags: [fonts]
 - include: teardown.yml
   tags: [always]
 

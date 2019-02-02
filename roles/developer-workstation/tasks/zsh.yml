@@ -1,12 +1,41 @@
 ---
 - name: ZSH - Install ZSH
-  apt: name=zsh state=present
+  apt:
+    name: zsh
   become: true
 
-- name: ZSH - Get zsh path
-  command: which zsh 
-  register: zsh_path
-
-- name: ZSH - Switch shell to {{ zsh_path.stdout }}
-  user: name={{ ansible_user_id }} shell={{ zsh_path.stdout }}
+- name: ZSH - Switch shell to zsh
+  user:
+    name: "{{ ansible_user_id }}"
+    shell: /usr/bin/zsh
   become: true
+
+- name: ZSH - Check if pure prompt installed
+  stat: path=/usr/local/share/zsh/site-functions/prompt_pure_setup
+  register: p
+
+- name: ZSH - Pure prompt
+  block:  
+    - name: ZSH - Download pure prompt
+      unarchive:
+        remote_src: yes
+        src: https://github.com/sindresorhus/pure/archive/v1.9.0.tar.gz
+        dest: "{{ _tmp.path }}"
+      register: archive_contents
+    - name: ZSH - Move pure prompt files to $fpath
+      copy:
+        src: "{{ _tmp.path }}/pure-1.9.0/pure.zsh"
+        dest: /usr/local/share/zsh/site-functions/prompt_pure_setup
+      become: true
+    - name: ZSH - Move pure prompt files to $fpath
+      copy:
+        src: "{{ _tmp.path }}/pure-1.9.0/async.zsh"
+        dest: /usr/local/share/zsh/site-functions/async
+      become: true
+  when: not p.stat.exists
+
+- name: ZSH - Copy .zshrc
+  copy:
+    src: .zshrc
+    dest: "{{ ansible_env.HOME }}"
+

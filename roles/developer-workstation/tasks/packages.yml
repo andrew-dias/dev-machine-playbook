@@ -1,9 +1,4 @@
 ---
-- name: Packages - Install curl
-  apt:
-    name: curl
-  become: true
-
 - name: Packages - Add neovim PPA
   apt_repository:
     repo: 'ppa:neovim-ppa/unstable'

@@ -6,7 +6,7 @@
 
 - name: Packages - Add neovim PPA
   apt_repository:
-    repo: 'ppa:neovim-ppa/stable'
+    repo: 'ppa:neovim-ppa/unstable'
   become: true
 
 - name: Packages - Install neovim

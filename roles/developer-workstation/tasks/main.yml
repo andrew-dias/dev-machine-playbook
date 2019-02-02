@@ -6,16 +6,16 @@
 - include: packages.yml
   tags: [packages]
 
+- include: zsh.yml
+  tags: [zsh]
+- include: sysctl.yml
+  tags: [sysctl]
+
 # Downloaded tools
 - include: sdkman.yml
   tags: [sdkman]
 - include: npm.yml
   tags: [npm]
-
-- include: zsh.yml
-  tags: [zsh]
-- include: sysctl.yml
-  tags: [sysctl]
 
 # OS look and feel
 - include: xdg.yml

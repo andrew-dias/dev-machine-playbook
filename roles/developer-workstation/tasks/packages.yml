@@ -9,11 +9,6 @@
     name: neovim
   become: true
 
-- name: Packages - Install tmux
-  apt: 
-    name: tmux
-  become: true
-
 - name: Packages - Install jq
   apt: 
     name: jq

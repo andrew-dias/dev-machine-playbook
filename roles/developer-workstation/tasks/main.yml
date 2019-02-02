@@ -23,6 +23,9 @@
 - include: fonts.yml
   tags: [fonts]
 
+- include: tmux.yml
+  tags: [tmux]
+
 - include: teardown.yml
   tags: [always]
 

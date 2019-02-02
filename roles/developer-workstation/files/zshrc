@@ -1,0 +1,71 @@
+# Lines configured by zsh-newuser-install
+HISTFILE=$HOME/.local/share/zsh_histfile
+HISTSIZE=1000
+SAVEHIST=1000
+setopt appendhistory autocd nomatch notify
+bindkey -v
+# End of lines configured by zsh-newuser-install
+
+# The following lines were added by compinstall
+zstyle :compinstall filename "$HOME/.zshrc"
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+
+# add local binaries to PATH
+export PATH=$HOME/.local/bin:$PATH
+
+# enable suggestions for commands not found
+source /etc/zsh_command_not_found
+
+# Aliases
+alias ls='ls --color=auto'
+alias grep='grep --color'
+alias la='ls -la'
+alias l='ls'
+alias cp='cp -i'
+alias mv='mv -i'
+
+# pure prompt
+autoload -U promptinit; promptinit
+prompt pure
+
+# dircolors
+eval `dircolors $HOME/.dircolors.base16.dark`
+
+# Base 16 shell colors
+BASE16_SHELL=$HOME/.config/base16-shell/
+[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# NVM auto-use .nvmrc
+# place this after nvm initialization!
+autoload -U add-zsh-hook
+load-nvmrc() {
+  local node_version="$(nvm version)"
+  local nvmrc_path="$(nvm_find_nvmrc)"
+
+  if [ -n "$nvmrc_path" ]; then
+    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+
+    if [ "$nvmrc_node_version" = "N/A" ]; then
+      nvm install
+    elif [ "$nvmrc_node_version" != "$node_version" ]; then
+      nvm use
+    fi
+  elif [ "$node_version" != "$(nvm version default)" ]; then
+    echo "Reverting to nvm default version"
+    nvm use default
+  fi
+}
+add-zsh-hook chpwd load-nvmrc
+load-nvmrc
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/home/andrew/.sdkman"
+[[ -s "/home/andrew/.sdkman/bin/sdkman-init.sh" ]] && source "/home/andrew/.sdkman/bin/sdkman-init.sh"
+

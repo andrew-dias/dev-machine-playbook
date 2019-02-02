@@ -15,6 +15,11 @@
     dest: "{{ ansible_env.HOME }}/.config/user-dirs.conf"
     backup: yes
 
+- name: XDG - Copy template files
+  copy: 
+    src: 'Empty Document'
+    dest: "{{ ansible_env.HOME }}/Templates/Empty Document"
+
 - name: XDG - Delete Public directory
   file:
     path: "{{ ansible_env.HOME }}/Public"

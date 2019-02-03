@@ -2,6 +2,7 @@
   roles:
   - developer-workstation
   - gantsign.visual-studio-code
+  - { role: cmprescott.chrome, become: true }
 
 
 

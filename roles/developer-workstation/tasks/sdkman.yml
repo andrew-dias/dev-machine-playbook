@@ -8,7 +8,7 @@
   environment:
     SDKMAN_DIR: "{{ xdg.XDG_DATA_HOME }}/sdkman"
 
-- name: SDKMAN - Update zshrc
+- name: SDKMAN - Update .zshrc
   blockinfile:
     dest: "{{ xdg.XDG_CONFIG_HOME }}/zsh/.zshrc"
     marker: "# {mark} ANSIBLE MANAGED BLOCK - sdkman.yml"

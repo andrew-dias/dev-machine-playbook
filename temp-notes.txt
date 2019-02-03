@@ -1,14 +1,7 @@
-- add .git to repo urls
-
 https://galaxy.ansible.com/mnussbaum/base16-builder-ansible
-
-
-Write into zshrc from sdkman playbook
-Extract other stuff from zshrc into tasks
 
 can we .zshrc -> zshrc?
 
-try tmuxinator
-https://github.com/tmuxinator/tmuxinator
+try tmuxinator - https://github.com/tmuxinator/tmuxinator
 
 make python-jmespath a prerequisit for playbook (readme)

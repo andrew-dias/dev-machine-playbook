@@ -1,14 +1,14 @@
-- name: Fonts - Ensure {{ font_dir }} exists
+- name: Fonts - Ensure {{ fonts.install_dir }} exists
   file:
-    path: "{{ font_dir }}"
+    path: "{{ fonts.install_dir }}"
     state: directory
 
 - name: Fonts - Download each font
   unarchive:
     remote_src: yes
     src: "{{ item['archive_url'] }}"
-    dest: "{{ font_dir }}"    
-  with_items: "{{ fonts }}"
+    dest: "{{ fonts.install_dir }}"    
+  with_items: "{{ fonts.font_list }}"
   register: archive_contents
 
 - name: Fonts - Update cache

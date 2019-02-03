@@ -10,22 +10,21 @@
     shell: /usr/bin/zsh
   become: true
 
-- name: ZSH - Pure prompt
+- name: ZSH - Clone Pure
   git:
-    repo: https://github.com/sindresorhus/pure
-    dest: "{{ ansible_env.HOME }}/.config/pure"
-  register: g
+    repo: https://github.com/sindresorhus/pure.git
+    dest: "{{ XDG_DATA_HOME }}/pure"
 
 - name: ZSH - Symlink pure.zsh
   file:
-    src: "{{ ansible_env.HOME }}/.config/pure/pure.zsh"
+    src: "{{ XDG_DATA_HOME }}/pure/pure.zsh"
     dest: /usr/local/share/zsh/site-functions/prompt_pure_setup
     state: link
   become: true
 
 - name: ZSH - Symlink async.zsh
   file:
-    src: "{{ ansible_env.HOME }}/.config/pure/async.zsh"
+    src: "{{ XDG_DATA_HOME }}/pure/async.zsh"
     dest: /usr/local/share/zsh/site-functions/async
     state: link
   become: true
@@ -33,15 +32,21 @@
 - name: ZSH - Base 16 shell
   git:
     repo: https://github.com/chriskempson/base16-shell.git
-    dest: "{{ ansible_env.HOME }}/.config/base16-shell"
+    dest: "{{ XDG_DATA_HOME }}/base16-shell"
 
 - name: ZSH - Copy dircolors file
   copy:
     src: dircolors.base16.dark
-    dest: "{{ ansible_env.HOME }}/.dircolors.base16.dark"
+    dest: "{{ XDG_DATA_HOME }}/dircolors/dircolors.base16.dark"
+
+- name: ZSH - Copy zshenv
+  copy:
+    src: zshenv
+    dest: /etc/zsh/zshenv
+  become: true
 
 - name: ZSH - Copy .zshrc
   copy:
     src: zshrc
-    dest: "{{ ansible_env.HOME }}/.zshrc"
+    dest: "{{ XDG_CONFIG_HOME }}/zsh/.zshrc"
 

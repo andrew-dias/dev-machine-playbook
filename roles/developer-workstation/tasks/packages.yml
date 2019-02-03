@@ -1,14 +1,4 @@
 ---
-- name: Packages - Add neovim PPA
-  apt_repository:
-    repo: 'ppa:neovim-ppa/unstable'
-  become: true
-
-- name: Packages - Install neovim
-  apt: 
-    name: neovim
-  become: true
-
 - name: Packages - Install jq
   apt: 
     name: jq

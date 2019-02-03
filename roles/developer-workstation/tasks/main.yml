@@ -25,6 +25,8 @@
 
 - include: tmux.yml
   tags: [tmux]
+- include: nvim.yml
+  tags: [nvim]
 
 - include: teardown.yml
   tags: [always]

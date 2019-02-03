@@ -1,0 +1,3 @@
+- add .git to repo urls
+
+Run PlugInstall in nvim

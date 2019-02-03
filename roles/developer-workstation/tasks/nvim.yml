@@ -1,0 +1,43 @@
+---
+- name: Neovim - Add PPA
+  apt_repository:
+    repo: 'ppa:neovim-ppa/unstable'
+  become: true
+
+- name: Neovim - Install
+  apt: 
+    name: neovim
+  become: true
+
+- name: Neovim - Create conf dir
+  file:
+    path: "{{ XDG_CONFIG_HOME }}/nvim"
+    state: directory
+
+- name: Neovim - Create data dir
+  file:
+    path: "{{ XDG_DATA_HOME }}/nvim/site/autoload"
+    recurse: yes
+
+- name: Neovim - Clone vim-plug
+  git:
+    repo: https://github.com/junegunn/vim-plug.git
+    dest: "{{ XDG_DATA_HOME }}/vim-plug"
+
+- name: Neovim - Copy plug.vim
+  copy:
+    src: "{{ XDG_DATA_HOME }}/vim-plug/plug.vim"
+    dest: "{{ XDG_DATA_HOME }}/nvim/site/autoload"
+
+- name: Neovim - Copy init.vim
+  copy:
+    src: init.vim
+    dest: "{{ ansible_env.HOME }}/.config/nvim/init.vim"
+
+- name: Neovim - Point vi to nvim
+  alternatives: link=/usr/bin/vi name=vi path=/usr/bin/nvim
+  become: true
+
+- name: Neovim - Point vim to nvim
+  alternatives: link=/usr/bin/vim name=vim path=/usr/bin/nvim
+  become: true

@@ -1,7 +1,4 @@
 ---
-- include: setup.yml
-  tags: [always]
-
 - include: zsh.yml
   tags: [zsh]
 
@@ -40,7 +37,4 @@
 
 - include: intellij.yml
   tags: [intellij]
-
-- include: teardown.yml
-  tags: [always]
 

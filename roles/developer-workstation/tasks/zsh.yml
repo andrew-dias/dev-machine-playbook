@@ -4,6 +4,13 @@
     name: zsh
   become: true
 
+- name: ZSH - Set ZDOTDIR
+  lineinfile:
+    dest: /etc/zsh/zshenv
+    backup: yes
+    line: export ZDOTDIR="$HOME/.config/zsh"
+  become: yes
+
 - name: ZSH - Switch shell to zsh
   user:
     name: "{{ ansible_user_id }}"
@@ -34,19 +41,27 @@
     repo: https://github.com/chriskempson/base16-shell.git
     dest: "{{ XDG_DATA_HOME }}/base16-shell"
 
+- name: ZSH - Create dircolors folder
+  file:
+    path: "{{ XDG_DATA_HOME }}/dircolors"
+    recurse: yes
+    state: directory
+
 - name: ZSH - Copy dircolors file
   copy:
     src: dircolors.base16.dark
     dest: "{{ XDG_DATA_HOME }}/dircolors/dircolors.base16.dark"
 
-- name: ZSH - Copy zshenv
-  copy:
-    src: zshenv
-    dest: /etc/zsh/zshenv
-  become: true
+- name: ZSH - Create config folder
+  file:
+    path: "{{ XDG_CONFIG_HOME }}/zsh"
+    recurse: yes
+    state: directory
 
-- name: ZSH - Copy .zshrc
+- name: ZSH - Copy zshrc
   copy:
     src: zshrc
     dest: "{{ XDG_CONFIG_HOME }}/zsh/.zshrc"
+
+
 

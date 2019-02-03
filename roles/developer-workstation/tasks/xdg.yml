@@ -1,6 +1,17 @@
 ---
+# Create XDG folders
+- name: XDG - Create folders
+  file:
+    path: "{{ item }}"
+    recurse: yes
+    state: directory
+  loop:
+    - "{{ XDG_DATA_HOME }}"
+    - "{{ XDG_CONFIG_HOME }}"
+    - "{{ XDG_CACHE_HOME }}"
+
 # Define XDG env vars
-- name: bash/zsh | configure | shell initialization
+- name: XDG - Add env vars to bashrc
   blockinfile:
     dest: "{{ ansible_env.HOME }}/.bashrc"
     create: yes

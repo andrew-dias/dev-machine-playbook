@@ -2,13 +2,16 @@
 - include: setup.yml
   tags: [always]
 
-# APT packages
-- include: packages.yml
-  tags: [packages]
-
 # ZSH
 - include: zsh.yml
   tags: [zsh]
+
+- include: xdg.yml
+  tags: [xdg]
+
+# APT packages
+- include: packages.yml
+  tags: [packages]
 
 # OS config
 - include: sysctl.yml
@@ -21,8 +24,6 @@
   tags: [npm]
 
 # OS look and feel
-- include: xdg.yml
-  tags: [xdg]
 - include: fonts.yml
   tags: [fonts]
 

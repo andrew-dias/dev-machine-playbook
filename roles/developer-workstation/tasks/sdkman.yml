@@ -18,4 +18,12 @@
       export SDKMAN_DIR="{{ xdg.XDG_DATA_HOME }}/sdkman"
       [[ -s "{{ xdg.XDG_DATA_HOME }}/sdkman/bin/sdkman-init.sh" ]] && source "{{ xdg.XDG_DATA_HOME }}/sdkman/bin/sdkman-init.sh"
 
+# SDKMAN creates a .zshrc in the root because it doesn't respect XDG
+- name: ZSH - Ensure ~/.zshrc is absent
+  file:
+    path: "{{ ansible_env.HOME }}/.zshrc"
+    state: absent
+
+
+
 

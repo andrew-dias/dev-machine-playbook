@@ -1,0 +1,6 @@
+---
+- name: Git - Copy config
+  copy:
+    src: git/config
+    dest: "{{ xdg.XDG_CONFIG_HOME }}/git/"
+

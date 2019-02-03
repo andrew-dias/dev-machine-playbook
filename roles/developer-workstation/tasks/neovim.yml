@@ -9,29 +9,28 @@
     name: neovim
   become: true
 
-- name: Neovim - Create conf dir
+- name: Neovim - Create config and data dirs
   file:
-    path: "{{ xdg.XDG_CONFIG_HOME }}/nvim"
+    path: "{{ item }}"
     state: directory
-
-- name: Neovim - Create data dir
-  file:
-    path: "{{ xdg.XDG_DATA_HOME }}/nvim/site/autoload"
     recurse: yes
+  loop:
+    - "{{ xdg.XDG_CONFIG_HOME }}/nvim"
+    - "{{ xdg.XDG_DATA_HOME }}/nvim/site/autoload"
 
 - name: Neovim - Clone vim-plug
   git:
     repo: https://github.com/junegunn/vim-plug.git
     dest: "{{ xdg.XDG_DATA_HOME }}/vim-plug"
 
-- name: Neovim - Copy plug.vim
+- name: Neovim - Copy plug.vim into autoload
   copy:
     src: "{{ xdg.XDG_DATA_HOME }}/vim-plug/plug.vim"
-    dest: "{{ xdg.XDG_DATA_HOME }}/nvim/site/autoload"
+    dest: "{{ xdg.XDG_DATA_HOME }}/nvim/site/autoload/"
 
-- name: Neovim - Copy init.vim
+- name: Neovim - Copy init.vim into config
   copy:
-    src: init.vim
+    src: neovim/init.vim
     dest: "{{ ansible_env.HOME }}/.config/nvim/init.vim"
 
 # TODO: this always registers as change

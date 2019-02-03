@@ -30,7 +30,16 @@
   tags: [fonts]
 
 - include: binfiles.yml
-  tags: [binfiles]
+  tags: [binfiles, dotfiles]
+
+- include: git.yml
+  tags: [git, dotfiles]
+
+- include: simple-dotfiles.yml
+  tags: [dotfiles]
+
+- include: intellij.yml
+  tags: [intellij]
 
 - include: teardown.yml
   tags: [always]

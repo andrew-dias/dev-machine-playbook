@@ -17,11 +17,6 @@
     recurse: yes
     state: directory
 
-- name: ZSH - Copy zshrc
-  copy:
-    src: zshrc
-    dest: "{{ xdg.XDG_CONFIG_HOME }}/zsh/.zshrc"
-
 - name: ZSH - Switch shell to zsh
   user:
     name: "{{ ansible_user_id }}"
@@ -60,14 +55,36 @@
 
 - name: ZSH - Copy dircolors file
   copy:
-    src: dircolors.base16.dark
+    src: zsh/dircolors.base16.dark
     dest: "{{ xdg.XDG_DATA_HOME }}/dircolors/dircolors.base16.dark"
 
-- name: ZSH - Update zshrc
+- name: ZSH - .zshrc
   blockinfile:
     dest: "{{ xdg.XDG_CONFIG_HOME }}/zsh/.zshrc"
+    create: yes
     marker: "# {mark} ANSIBLE MANAGED BLOCK - zsh.yml"
     block: |
+      # Lines configured by zsh-newuser-install
+      HISTFILE={{ xdg.XDG_DATA_HOME }}/zsh_histfile
+      HISTSIZE=1000
+      SAVEHIST=1000
+      setopt appendhistory autocd nomatch notify
+      bindkey -v
+      # End of lines configured by zsh-newuser-install
+      # The following lines were added by compinstall
+      zstyle :compinstall filename "{{ xdg.XDG_CONFIG_HOME }}/zsh/.zshrc"
+      autoload -Uz compinit
+      compinit
+      # End of lines added by compinstall
+      # enable suggestions for commands not found
+      source /etc/zsh_command_not_found
+      # Aliases
+      alias ls='ls --color=auto'
+      alias grep='grep --color'
+      alias la='ls -la'
+      alias l='ls'
+      alias cp='cp -i'
+      alias mv='mv -i'
       # pure prompt
       autoload -U promptinit; promptinit
       prompt pure

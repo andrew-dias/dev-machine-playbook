@@ -1,0 +1,6 @@
+---
+- name: Simple dotfiles - editorconfig
+  copy:
+    src: simple-dotfiles/editorconfig
+    dest: "{{ ansible_env.HOME }}/.editorconfig"
+

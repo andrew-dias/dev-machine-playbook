@@ -1,5 +1,4 @@
 ---
-# Create XDG folders
 - name: XDG - Create data/config/cache folders
   file:
     path: "{{ item }}"
@@ -10,7 +9,6 @@
     - "{{ xdg.XDG_CONFIG_HOME }}"
     - "{{ xdg.XDG_CACHE_HOME }}"
 
-# Define XDG env vars in bash/zsh
 - name: XDG - Add env vars to bash/zsh
   blockinfile:
     dest: "{{ item }}"
@@ -29,19 +27,19 @@
 # See http://jamesmcminn.com/2012/12/removing-entries-from-nautilus-3-6-places/
 - name: XDG - Write user-dirs.dirs
   copy: 
-    src: user-dirs.dirs
+    src: xdg/user-dirs.dirs
     dest: "{{ ansible_env.HOME }}/.config/user-dirs.dirs"
     backup: yes
 
 - name: XDG - Write user-dirs.conf
   copy: 
-    src: user-dirs.conf
+    src: xdg/user-dirs.conf
     dest: "{{ ansible_env.HOME }}/.config/user-dirs.conf"
     backup: yes
 
 - name: XDG - Copy template files
   copy: 
-    src: 'Empty Document'
+    src: xdg/empty-template
     dest: "{{ ansible_env.HOME }}/Templates/Empty Document"
 
 - name: XDG - Delete unused home directories

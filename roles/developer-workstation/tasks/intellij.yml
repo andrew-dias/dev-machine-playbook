@@ -1,0 +1,16 @@
+---
+
+# TODO: jmespath is not recognized by jetbrains-toolbox role when installed here (needs to be installed manually before running playbook)
+#- name: IntelliJ - Install jmespath
+#  apt: 
+#    name: python-jmespath
+#  become: true
+
+- name: IntelliJ - Install jetbrains-toolbox
+  include_role:
+    name: jaredhocutt.jetbrains_toolbox
+
+- name: IntelliJ - Copy ideavimrc
+  copy:
+    src: intellij/ideavimrc
+    dest: "{{ ansible_env.HOME }}/.ideavimrc"

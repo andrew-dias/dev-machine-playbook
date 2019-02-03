@@ -10,3 +10,5 @@ can we .zshrc -> zshrc?
 
 try tmuxinator
 https://github.com/tmuxinator/tmuxinator
+
+make python-jmespath a prerequisit for playbook (readme)

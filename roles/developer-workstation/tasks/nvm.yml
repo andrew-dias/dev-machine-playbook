@@ -14,8 +14,7 @@
   environment:
     NVM_DIR: "{{ xdg.XDG_DATA_HOME }}/nvm"
 
-# Define XDG env vars
-- name: NVM - Update zshrc
+- name: NVM - Update .zshrc
   blockinfile:
     dest: "{{ xdg.XDG_CONFIG_HOME }}/zsh/.zshrc"
     marker: "# {mark} ANSIBLE MANAGED BLOCK - nvm.yml"

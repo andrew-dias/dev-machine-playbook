@@ -2,16 +2,19 @@
 - include: setup.yml
   tags: [always]
 
-# OS packages
+# APT packages
 - include: packages.yml
   tags: [packages]
 
+# ZSH
 - include: zsh.yml
   tags: [zsh]
+
+# OS config
 - include: sysctl.yml
   tags: [sysctl]
 
-# Downloaded tools
+# Non-APT packages
 - include: sdkman.yml
   tags: [sdkman]
 - include: npm.yml

@@ -1,8 +1,17 @@
 ---
-#
+# Define XDG env vars
+- name: bash/zsh | configure | shell initialization
+  blockinfile:
+    dest: "{{ ansible_env.HOME }}/.bashrc"
+    create: yes
+    backup: yes
+    block: |
+      export XDG_CONFIG_HOME={{ XDG_CONFIG_HOME }}
+      export XDG_DATA_HOME={{ XDG_DATA_HOME }}
+      export XDG_CACHE_HOME={{ XDG_CACHE_HOME }}
+
 # Remove some standard folders from home folder
 # See http://jamesmcminn.com/2012/12/removing-entries-from-nautilus-3-6-places/
-#
 - name: XDG - Write user-dirs.dirs
   copy: 
     src: user-dirs.dirs

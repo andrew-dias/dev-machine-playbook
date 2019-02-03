@@ -1,6 +1,7 @@
 ---
-- name: SDKMAN - Check if .sdkman exists
-  stat: path={{ansible_env.HOME}}/.sdkman
+- name: SDKMAN - Check if sdkman exists
+  stat:
+    path: "{{ XDG_DATA_HOME }}/sdkman"
   register: p
 
 - name: SDKMAN - Download install script
@@ -12,5 +13,7 @@
         dest: "{{ _tmp.path }}/sdkman_install"
     - name: SDKMAN - Run install script
       shell: "{{ _tmp.path }}/sdkman_install"
+      environment:
+        SDKMAN_DIR: "{{ XDG_DATA_HOME }}/sdkman"
   when: not p.stat.exists
 

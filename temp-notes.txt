@@ -1,3 +1,7 @@
 - add .git to repo urls
 
 Run PlugInstall in nvim
+
+https://galaxy.ansible.com/mnussbaum/base16-builder-ansible
+
+Clone nvm repo and install into xdg_dir

@@ -13,11 +13,6 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-# export XDG vars
-export XDG_CONFIG_HOME=$HOME/.config
-export XDG_DATA_HOME=$HOME/.local/share
-export XDG_CACHE_HOME=$HOME/.cache
-
 # enable suggestions for commands not found
 source /etc/zsh_command_not_found
 
@@ -28,19 +23,4 @@ alias la='ls -la'
 alias l='ls'
 alias cp='cp -i'
 alias mv='mv -i'
-
-# pure prompt
-autoload -U promptinit; promptinit
-prompt pure
-
-# dircolors
-eval `dircolors $XDG_DATA_HOME/dircolors/dircolors.base16.dark`
-
-# Base 16 shell colors
-BASE16_SHELL=$XDG_DATA_HOME/base16-shell
-[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/home/andrew/.sdkman"
-[[ -s "/home/andrew/.sdkman/bin/sdkman-init.sh" ]] && source "/home/andrew/.sdkman/bin/sdkman-init.sh"
 

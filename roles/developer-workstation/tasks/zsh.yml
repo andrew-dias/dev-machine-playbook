@@ -6,10 +6,21 @@
 
 - name: ZSH - Set ZDOTDIR
   lineinfile:
-    dest: /etc/zsh/zshenv
+    dest: "{{ zsh.zshenv_dir }}"
     backup: yes
     line: export ZDOTDIR="$HOME/.config/zsh"
   become: yes
+
+- name: ZSH - Create config folder
+  file:
+    path: "{{ xdg.XDG_CONFIG_HOME }}/zsh"
+    recurse: yes
+    state: directory
+
+- name: ZSH - Copy zshrc
+  copy:
+    src: zshrc
+    dest: "{{ xdg.XDG_CONFIG_HOME }}/zsh/.zshrc"
 
 - name: ZSH - Switch shell to zsh
   user:
@@ -20,48 +31,56 @@
 - name: ZSH - Clone Pure
   git:
     repo: https://github.com/sindresorhus/pure.git
-    dest: "{{ XDG_DATA_HOME }}/pure"
+    dest: "{{ xdg.XDG_DATA_HOME }}/pure"
 
 - name: ZSH - Symlink pure.zsh
   file:
-    src: "{{ XDG_DATA_HOME }}/pure/pure.zsh"
-    dest: /usr/local/share/zsh/site-functions/prompt_pure_setup
+    src: "{{ xdg.XDG_DATA_HOME }}/pure/pure.zsh"
+    dest: "{{ zsh.fpath }}/prompt_pure_setup"
     state: link
   become: true
 
 - name: ZSH - Symlink async.zsh
   file:
-    src: "{{ XDG_DATA_HOME }}/pure/async.zsh"
-    dest: /usr/local/share/zsh/site-functions/async
+    src: "{{ xdg.XDG_DATA_HOME }}/pure/async.zsh"
+    dest: "{{ zsh.fpath }}/async"
     state: link
   become: true
 
 - name: ZSH - Base 16 shell
   git:
     repo: https://github.com/chriskempson/base16-shell.git
-    dest: "{{ XDG_DATA_HOME }}/base16-shell"
+    dest: "{{ xdg.XDG_DATA_HOME }}/base16-shell"
 
 - name: ZSH - Create dircolors folder
   file:
-    path: "{{ XDG_DATA_HOME }}/dircolors"
+    path: "{{ xdg.XDG_DATA_HOME }}/dircolors"
     recurse: yes
     state: directory
 
 - name: ZSH - Copy dircolors file
   copy:
     src: dircolors.base16.dark
-    dest: "{{ XDG_DATA_HOME }}/dircolors/dircolors.base16.dark"
+    dest: "{{ xdg.XDG_DATA_HOME }}/dircolors/dircolors.base16.dark"
 
-- name: ZSH - Create config folder
+- name: ZSH - Update zshrc
+  blockinfile:
+    dest: "{{ xdg.XDG_CONFIG_HOME }}/zsh/.zshrc"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK - zsh.yml"
+    block: |
+      # pure prompt
+      autoload -U promptinit; promptinit
+      prompt pure
+      # Load base-16 shell colors
+      BASE16_SHELL={{ xdg.XDG_DATA_HOME }}/base16-shell
+      [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+      # dircolors
+      eval `dircolors {{ xdg.XDG_DATA_HOME }}/dircolors/dircolors.base16.dark`
+
+- name: ZSH - Ensure ~/.zshrc is absent
   file:
-    path: "{{ XDG_CONFIG_HOME }}/zsh"
-    recurse: yes
-    state: directory
-
-- name: ZSH - Copy zshrc
-  copy:
-    src: zshrc
-    dest: "{{ XDG_CONFIG_HOME }}/zsh/.zshrc"
+    path: "{{ ansible_env.HOME }}/.zshrc"
+    state: absent
 
 
 

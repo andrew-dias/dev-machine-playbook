@@ -1,13 +1,23 @@
 ---
 # xdg dirs
-XDG_CACHE_HOME: "{{ ansible_env.HOME }}/.cache"
-XDG_CONFIG_HOME: "{{ ansible_env.HOME }}/.config"
-XDG_DATA_HOME: "{{ ansible_env.HOME }}/.local/share"
+xdg:
+  XDG_CACHE_HOME: "{{ ansible_env.HOME }}/.cache"
+  XDG_CONFIG_HOME: "{{ ansible_env.HOME }}/.config"
+  XDG_DATA_HOME: "{{ ansible_env.HOME }}/.local/share"
+
+
+# zsh
+zsh:
+  zshenv_dir: /etc/zsh/zshenv
+  fpath: /usr/local/share/zsh/site-functions
 
 # fonts
-font_dir: "{{ XDG_DATA_HOME }}/fonts"
 fonts:
-  - name: hasklig
-    archive_url: https://github.com/i-tu/Hasklig/releases/download/1.1/Hasklig-1.1.zip
+  install_dir: "{{ xdg.XDG_DATA_HOME }}/fonts"
+  font_list:
+    - name: hasklig
+      archive_url: https://github.com/i-tu/Hasklig/releases/download/1.1/Hasklig-1.1.zip
 
-
+# nvm
+nvm:
+  version: 0.34.0

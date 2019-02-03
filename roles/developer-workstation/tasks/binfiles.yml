@@ -1,0 +1,6 @@
+---
+- copy:
+    src: ../files/bin/
+    dest: "{{ ansible_env.HOME }}/bin/"
+    mode: 0744
+

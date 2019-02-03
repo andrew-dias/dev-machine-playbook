@@ -1,29 +1,26 @@
 ---
-#- name: NVM - Clone repo
-#  git:
-#    repo: https://github.com/junegunn/vim-plug.git
-#    dest: "{{ XDG_CONFIG_HOME }}/vim-plug"
+- name: NVM - Create install dir
+  file:
+    path: "{{ xdg.XDG_DATA_HOME }}/nvm"
+    state: directory
 
 - name: "NVM - Install"
   shell: >
-    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | zsh
+    curl -o- https://raw.githubusercontent.com/creationix/nvm/v{{ nvm.version }}/install.sh | zsh
   args:
     executable: /bin/zsh
-    creates: "{{ XDG_CONFIG_HOME }}/nvm/nvm.sh"
+    creates: "{{ xdg.XDG_DATA_HOME }}/nvm/nvm.sh"
     warn: false
   environment:
-    XDG_CONFIG_HOME: "{{ XDG_CONFIG_HOME }}"
-  register: p
-
-- debug:
-    msg: "{{ p }}"
+    NVM_DIR: "{{ xdg.XDG_DATA_HOME }}/nvm"
 
 # Define XDG env vars
-- name: NVM - Load in zshrc
+- name: NVM - Update zshrc
   blockinfile:
-    dest: "{{ XDG_CONFIG_HOME }}/zsh/.zshrc"
+    dest: "{{ xdg.XDG_CONFIG_HOME }}/zsh/.zshrc"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK - nvm.yml"
     block: |
-      export NVM_DIR="{{ XDG_CONFIG_HOME }}/nvm"
+      export NVM_DIR="{{ xdg.XDG_DATA_HOME }}/nvm"
       [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
       [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
       autoload -U add-zsh-hook
@@ -47,10 +44,10 @@
 
 - name: "Install node versions"
   shell: >
-    . {{ XDG_CONFIG_HOME }}/nvm/nvm.sh && nvm install {{ item }}
+    . {{ xdg.XDG_DATA_HOME }}/nvm/nvm.sh && nvm install {{ item }}
   args:
     executable: /bin/zsh
-    creates: "{{ XDG_CONFIG_HOME }}/nvm/versions/node/v{{ item }}"
+    creates: "{{ xdg.XDG_DATA_HOME }}/nvm/versions/node/v{{ item }}"
   loop:
     - 10.15.1
     - 8.15.0

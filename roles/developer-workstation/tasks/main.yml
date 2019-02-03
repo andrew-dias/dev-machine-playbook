@@ -2,35 +2,35 @@
 - include: setup.yml
   tags: [always]
 
-# ZSH
 - include: zsh.yml
   tags: [zsh]
 
 - include: xdg.yml
   tags: [xdg]
 
-# APT packages
-- include: packages.yml
-  tags: [packages]
+- include: nvm.yml
+  tags: [nvm]
 
-# OS config
-- include: sysctl.yml
-  tags: [sysctl]
-
-# Non-APT packages
 - include: sdkman.yml
   tags: [sdkman]
-- include: npm.yml
-  tags: [npm]
 
-# OS look and feel
-- include: fonts.yml
-  tags: [fonts]
+- include: neovim.yml
+  tags: [neovim]
 
 - include: tmux.yml
   tags: [tmux]
-- include: nvim.yml
-  tags: [nvim]
+
+- include: packages.yml
+  tags: [packages]
+
+- include: sysctl.yml
+  tags: [sysctl]
+
+- include: fonts.yml
+  tags: [fonts]
+
+- include: binfiles.yml
+  tags: [binfiles]
 
 - include: teardown.yml
   tags: [always]

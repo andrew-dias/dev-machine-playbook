@@ -1,25 +1,29 @@
 ---
 # Create XDG folders
-- name: XDG - Create folders
+- name: XDG - Create data/config/cache folders
   file:
     path: "{{ item }}"
     recurse: yes
     state: directory
   loop:
-    - "{{ XDG_DATA_HOME }}"
-    - "{{ XDG_CONFIG_HOME }}"
-    - "{{ XDG_CACHE_HOME }}"
+    - "{{ xdg.XDG_DATA_HOME }}"
+    - "{{ xdg.XDG_CONFIG_HOME }}"
+    - "{{ xdg.XDG_CACHE_HOME }}"
 
-# Define XDG env vars
-- name: XDG - Add env vars to bashrc
+# Define XDG env vars in bash/zsh
+- name: XDG - Add env vars to bash/zsh
   blockinfile:
-    dest: "{{ ansible_env.HOME }}/.bashrc"
+    dest: "{{ item }}"
     create: yes
     backup: yes
+    marker: "# {mark} ANSIBLE MANAGED BLOCK - xdg.yml"
     block: |
-      export XDG_CONFIG_HOME={{ XDG_CONFIG_HOME }}
-      export XDG_DATA_HOME={{ XDG_DATA_HOME }}
-      export XDG_CACHE_HOME={{ XDG_CACHE_HOME }}
+      export XDG_CONFIG_HOME={{ xdg.XDG_CONFIG_HOME }}
+      export XDG_DATA_HOME={{ xdg.XDG_DATA_HOME }}
+      export XDG_CACHE_HOME={{ xdg.XDG_CACHE_HOME }}
+  loop:
+    - "{{ ansible_env.HOME }}/.bashrc"
+    - "{{ xdg.XDG_CONFIG_HOME }}/zsh/.zshrc"
 
 # Remove some standard folders from home folder
 # See http://jamesmcminn.com/2012/12/removing-entries-from-nautilus-3-6-places/
@@ -40,28 +44,14 @@
     src: 'Empty Document'
     dest: "{{ ansible_env.HOME }}/Templates/Empty Document"
 
-- name: XDG - Delete Public directory
+- name: XDG - Delete unused home directories
   file:
-    path: "{{ ansible_env.HOME }}/Public"
+    path: "{{ ansible_env.HOME }}/{{ item }}"
     state: absent
-
-- name: XDG - Delete Documents directory
-  file:
-    path: "{{ ansible_env.HOME }}/Documents"
-    state: absent
-
-- name: XDG - Delete Music directory
-  file:
-    path: "{{ ansible_env.HOME }}/Music"
-    state: absent
-
-- name: XDG - Delete Pictures directory
-  file:
-    path: "{{ ansible_env.HOME }}/Pictures"
-    state: absent
-
-- name: XDG - Delete Videos directory
-  file:
-    path: "{{ ansible_env.HOME }}/Videos"
-    state: absent
+  loop:
+    - Public
+    - Documents
+    - Music
+    - Pictures
+    - Videos
 

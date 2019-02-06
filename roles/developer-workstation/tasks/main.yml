@@ -35,6 +35,12 @@
 - include: simple-dotfiles.yml
   tags: [dotfiles]
 
+- include: dconf.yml
+  tags: [dconf]
+
+- include: ssh.yml
+  tags: [ssh]
+
 - include: intellij.yml
   tags: [intellij]
 

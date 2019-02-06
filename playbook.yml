@@ -1,8 +1,13 @@
 - hosts: localhost
+
   roles:
   - developer-workstation
   - gantsign.visual-studio-code
+  - jaredhocutt.jetbrains_toolbox
   - { role: cmprescott.chrome, become: true }
 
-
+  vars_prompt:
+    - name: "ssh_key_passphrase"
+      prompt: "Enter SSH key passphrase"
+      private: yes
 

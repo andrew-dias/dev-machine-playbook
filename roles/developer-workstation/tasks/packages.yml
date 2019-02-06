@@ -4,3 +4,8 @@
     name: jq
   become: true
 
+- name: Packages - Install dconf-editor 
+  apt: 
+    name: dconf-editor
+  become: true
+

@@ -1,0 +1,5 @@
+- name: DCONF - Enable Night Light
+  dconf:
+    key: "/org/gnome/calendar/follow-night-light"
+    value: "true"
+    state: present

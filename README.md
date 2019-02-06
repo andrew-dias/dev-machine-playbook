@@ -1,66 +1,31 @@
 # dev-machine-playbook
 
-This [Ansible](https://github.com/ansible/ansible) playbook configures my personal development machine.  It is designed to run on a fresh Linux Mint 18.1 installation, and has not been tested with any other distributions.
+This [Ansible](https://github.com/ansible/ansible) playbook configures my [Pop_OS!](https://system76.com/pop) 18.10 development machine, including applications, OS configuration, and dotfiles.
 
-The playbook can also be configured to clone any number of dotfiles repositories and execute a specified installer script on each.
+## Contents
 
-## Requirements
-
-Before running this playbook you must have both [Git](https://git-scm.com/) and [Ansible](https://github.com/ansible/ansible) installed.
-
-
-```shell
-apt add-repository ppa:git-core/ppa
-apt add-repository ppa:ansible/ansible
-apt update
-apt install git
-apt install ansible
-```
+* [Zsh](http://zsh.sourceforge.net) with configuration, plugins and colour settings
+* [Node Version Manager](https://github.com/creationix/nvm) and NodeJS
+* [SDKMAN!](https://sdkman.io)
+* [Neovim](https://neovim.io) with configuration and plugins
+* [tmux](https://github.com/tmux/tmux) with configuration
+* [jq](https://stedolan.github.io/jq)
+* Fonts
+* Personal helper scripts, installed to `~/bin`
+* Various dotfiles (git, editorconfig)
+* [Jetbrains Toolbox](https://www.jetbrains.com/toolbox/)
+* Google Chrome
 
 ## Installation
-
-1. Clone this repository
-
-  ```shell
-  git clone https://github.com/andrew-dias/dev-machine-playbook.git
-  ```
-
-1. Install Ansible dependencies
-
-  The playbook dependencies are defind in `requirements.yml`. 
-
-  ```shell
-  ansible-galaxy install -r requirements.yml
-  ```
-
-  The playbook uses `ansible.cfg` to set the roles installation path to your `~/.local/share/ansible/roles` folder due to Ansible issue [#16010](https://github.com/ansible/ansible/issues/16010).
 
 1. Run the playbook
 
   ```shell
-  ansible-playbook playbook.yml
+  ansible-playbook playbook.yml -i hosts -K
   ```
-
 1. Log out to ensure all changes are activated
 
-## Dotfiles
-
-The playbook takes an optional --extra-vars parameter to receive a .yml file that (typically) defines dotfiles repos to clone and install.  For example, a file `local-vars.yml` could be maintaind on the local filesystem:
-  
-  ```
-  ---
-  dotfiles:
-    - name: dotfiles
-      repo: https://github.com/andrew-dias/dotfiles.git
-      dest: ../dotfiles
-      runner: install
-  ```
-
-  And then fed to Ansible:
-
-  ```shell
-  ansible-playbook playbook.yml --extra-vars=@../local-vars.yml --tags dotfiles
-  ```
+1. Open a terminal and choose your colour theme by typing `base16` followed by a tab to perform tab completion.
 
 ## Manual Steps (for now)
 
@@ -72,13 +37,6 @@ The playbook takes an optional --extra-vars parameter to receive a .yml file tha
   ```
     
 * Gitkraken
-* IntelliJ
-* VS Code
-* Node (through nvm) and global packages
-* Grails (through sdkman)
-* Gradle (through sdkman)
-* Desktop panel launchers
-* Yarn
 * Enable redshift
 *  ansible-playbook playbook.yml -i hosts -K
 * dconf editor

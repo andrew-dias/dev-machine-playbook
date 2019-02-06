@@ -21,6 +21,12 @@ This [Ansible](https://github.com/ansible/ansible) playbook configures my [Pop_O
 
 ## Installation
 
+1. Install [Galaxy](https://galaxy.ansible.com) roles
+
+  ```shell
+  ansible-galaxy install -r requirements.yml
+  ```
+
 1. Run the playbook
 
   ```shell

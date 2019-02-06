@@ -9,8 +9,19 @@
     name: dconf-editor
   become: true
 
+# can't point to gitkraken url because apt won't follow redirect to cdn
 - name: Packages - Install Gitkraken
   apt:
     deb: https://release.axocdn.com/linux/gitkraken-amd64.deb
+  become: true
+
+- name: Packages - Add Timeshift PPA
+  apt_repository:
+    repo: 'ppa:teejee2008/ppa'
+  become: true
+
+- name: Package - Install Timeshift
+  apt:
+    name: timeshift
   become: true
 

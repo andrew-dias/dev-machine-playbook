@@ -1,7 +1,0 @@
-https://galaxy.ansible.com/mnussbaum/base16-builder-ansible
-
-can we .zshrc -> zshrc?
-
-try tmuxinator - https://github.com/tmuxinator/tmuxinator
-
-make python-jmespath a prerequisit for playbook (readme)

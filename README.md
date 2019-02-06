@@ -22,19 +22,15 @@ This [Ansible](https://github.com/ansible/ansible) playbook configures my [Pop_O
 ## Installation
 
 1. Install [Galaxy](https://galaxy.ansible.com) roles
-
   ```shell
   ansible-galaxy install -r requirements.yml
   ```
-
-1. Run the playbook
-
+2. Run the playbook
   ```shell
   ansible-playbook playbook.yml -i hosts -K
   ```
-1. Log out to ensure all changes are activated
-
-1. Open a terminal and choose your colour theme by typing `base16` followed by a tab to perform tab completion.
+3. Log out to ensure all changes are activated
+4. Open a terminal and choose your colour theme by typing `base16` followed by a tab to perform tab completion.
 
 ## TODO
 

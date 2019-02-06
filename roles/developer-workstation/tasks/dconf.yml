@@ -1,3 +1,9 @@
+# python-psutil is required by dconf
+- name: Packages - Install python-psutil
+  apt:
+    name: python-psutil
+  become: true
+
 - name: DCONF - Enable Night Light
   dconf:
     key: "/org/gnome/calendar/follow-night-light"

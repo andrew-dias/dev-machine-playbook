@@ -2,9 +2,8 @@
 
   roles:
   - developer-workstation
-  - gantsign.visual-studio-code
-  - jaredhocutt.jetbrains_toolbox
-  - { role: cmprescott.chrome, become: true }
+  - { role: ngetchell.vscode, become: true, tags: 'vscode' }
+  - { role: cmprescott.chrome, become: true, tags: 'chrome' }
 
   vars_prompt:
     - name: "ssh_key_passphrase"

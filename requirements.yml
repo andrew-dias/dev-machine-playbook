@@ -1,4 +1,5 @@
 ---
 - src: cmprescott.chrome
-- src: gantsign.visual-studio-code
+- src: ngetchell.vscode
 - src: jaredhocutt.jetbrains_toolbox
+

@@ -5,7 +5,7 @@
   become: true
 
 - name: Neovim - Install
-  apt: 
+  apt:
     name: neovim
   become: true
 
@@ -34,7 +34,7 @@
     dest: "{{ ansible_env.HOME }}/.config/nvim/init.vim"
 
 # TODO: this always registers as change
-- name: Neovim - Install plugins
+- name: Neovim - Install plugins (**always registers as changed**)
   shell: >
     nvim +'PlugInstall --sync' +qa
 

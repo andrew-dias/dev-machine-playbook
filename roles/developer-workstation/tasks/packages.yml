@@ -1,11 +1,16 @@
 ---
 - name: Packages - Install jq
-  apt: 
+  apt:
     name: jq
   become: true
 
-- name: Packages - Install dconf-editor 
-  apt: 
+- name: Packages - Install dconf-editor
+  apt:
     name: dconf-editor
+  become: true
+
+- name: Packages - Install Gitkraken
+  apt:
+    deb: https://release.axocdn.com/linux/gitkraken-amd64.deb
   become: true
 

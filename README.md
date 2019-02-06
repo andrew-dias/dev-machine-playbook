@@ -35,3 +35,10 @@ This [Ansible](https://github.com/ansible/ansible) playbook configures my [Pop_O
 1. Log out to ensure all changes are activated
 
 1. Open a terminal and choose your colour theme by typing `base16` followed by a tab to perform tab completion.
+
+## TODO
+
+* [Docker](https://galaxy.ansible.com/geerlingguy/docker)
+* Mattermost (mattermost-desktop)
+* Java?
+* 

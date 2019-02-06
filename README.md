@@ -41,4 +41,7 @@ This [Ansible](https://github.com/ansible/ansible) playbook configures my [Pop_O
 * [Docker](https://galaxy.ansible.com/geerlingguy/docker)
 * Mattermost (mattermost-desktop)
 * Java?
+* Cisco VPN
+* Pidgin
+* Postman
 * 

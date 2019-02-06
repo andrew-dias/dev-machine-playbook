@@ -13,8 +13,11 @@ This [Ansible](https://github.com/ansible/ansible) playbook configures my [Pop_O
 * Fonts
 * Personal helper scripts, installed to `~/bin`
 * Various dotfiles (git, editorconfig)
-* [Jetbrains Toolbox](https://www.jetbrains.com/toolbox/)
+* [Jetbrains Toolbox](https://www.jetbrains.com/toolbox)
+* [Visual Studio Code](https://code.visualstudio.com)
+* [Gitkraken](https://www.gitkraken.com)
 * Google Chrome
+* Generate SSH keypair
 
 ## Installation
 
@@ -26,19 +29,3 @@ This [Ansible](https://github.com/ansible/ansible) playbook configures my [Pop_O
 1. Log out to ensure all changes are activated
 
 1. Open a terminal and choose your colour theme by typing `base16` followed by a tab to perform tab completion.
-
-## Manual Steps (for now)
-
-* **ssh**: In my case I copy my ssh keys from an external location.
-  
-  ```shell
-  $ cp -r <source-ssh-dir> ~/.ssh
-  $ chmod 644 ~/.ssh/id_rsa.pub && chmod 600 ~/.ssh/id_rsa
-  ```
-    
-* Gitkraken
-* Enable redshift
-*  ansible-playbook playbook.yml -i hosts -K
-* dconf editor
-
-

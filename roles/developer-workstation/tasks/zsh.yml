@@ -64,18 +64,16 @@
     create: yes
     marker: "# {mark} ANSIBLE MANAGED BLOCK - zsh.yml"
     block: |
-      # Lines configured by zsh-newuser-install
+      # zsh history
       HISTFILE={{ xdg.XDG_DATA_HOME }}/zsh_histfile
       HISTSIZE=1000
       SAVEHIST=1000
       setopt appendhistory autocd nomatch notify
       bindkey -v
-      # End of lines configured by zsh-newuser-install
-      # The following lines were added by compinstall
+      # zsh completion
       zstyle :compinstall filename "{{ xdg.XDG_CONFIG_HOME }}/zsh/.zshrc"
       autoload -Uz compinit
       compinit
-      # End of lines added by compinstall
       # enable suggestions for commands not found
       source /etc/zsh_command_not_found
       # Aliases
@@ -98,6 +96,3 @@
   file:
     path: "{{ ansible_env.HOME }}/.zshrc"
     state: absent
-
-
-

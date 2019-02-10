@@ -1,3 +1,6 @@
+# DEPRECATED - REFACTORED INTO A ROLES
+See https://github.com/andrew-dias/ansible-role-dev-machine
+
 # dev-machine-playbook
 
 This [Ansible](https://github.com/ansible/ansible) playbook configures my personal development machine.  It is designed to run on a fresh Linux Mint 18.1 installation, and has not been tested with any other distributions.

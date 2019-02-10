@@ -1,4 +1,4 @@
-# DEPRECATED - REFACTORED INTO A ROLES
+# DEPRECATED - REFACTORED INTO ROLES
 See https://github.com/andrew-dias/ansible-role-dev-machine
 
 # dev-machine-playbook
